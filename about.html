@@ -55,65 +55,53 @@
 <body class="bg-secondary dark:bg-black text-dark dark:text-gray-100">
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 text-white bg-transparent py-6 transition-all duration-500 origin-top" id="navbar">
+        <nav class="w-full fixed top-0 left-0 bg-transparent text-white py-6 z-50 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
-            <!-- Logo -->
-            <div class="text-2xl font-bold tracking-widest uppercase cursor-pointer"
-                onclick="window.location.href='index.html'">
-                KOTRE<span class="text-primary text-3xl leading-none">.</span>
+            <div class="text-2xl font-bold tracking-widest uppercase cursor-pointer">
+                <a href="index.html">KOTRE<span class="text-primary text-3xl leading-none">.</span></a>
             </div>
-
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-10 text-sm font-bold tracking-[0.1em] uppercase">
-                <a href="index.html" class="hover:text-primary transition-colors duration-200">Home</a>
-                <a href="index.html#shop" class="hover:text-primary transition-colors duration-200">Shop</a>
-                <a href="#" class="hover:text-primary transition-colors duration-200">Collection</a>
-                <a href="about.html" class="text-primary transition-colors duration-200">About</a>
-                <a href="#" class="hover:text-primary transition-colors duration-200">Blog</a>
-                <a href="#" class="hover:text-primary transition-colors duration-200">Contact Us</a>
-            </div>
-
-            <!-- Icons -->
-            <div class="flex items-center space-x-6">
-                <button id="theme-toggle" class="hover:text-primary transition-colors duration-200 cursor-pointer"><i data-lucide="moon" class="w-5 h-5 theme-icon"></i></button>
-                <button class="hover:text-primary transition-colors duration-200 cursor-pointer"><i data-lucide="search"
-                        class="w-5 h-5"></i></button>
-                <button class="hover:text-primary transition-colors duration-200 cursor-pointer"><i data-lucide="user"
-                        class="w-5 h-5"></i></button>
-                <button class="hover:text-primary transition-colors duration-200 cursor-pointer relative" id="cart-btn"
-                    onclick="window.location.href='cart.html'">
-                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                    <span id="cart-count"
-                        class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold shadow-sm">0</span>
-                </button>
-                <button id="mobile-menu-btn" class="md:hidden hover:text-primary z-[60] relative"><i data-lucide="menu"
-                        class="w-6 h-6"></i></button>
+            <div class="flex items-center space-x-8 ">
+                <button id="theme-toggle" class="hover:text-primary transition-colors duration-200 cursor-pointer flex items-center justify-center outline-none"><i data-lucide="moon" class="w-5 h-5 theme-icon"></i></button>
+                <button id="mobile-menu-btn" class="hover:text-primary z-[60] relative cursor-pointer flex items-center justify-center outline-none"><i data-lucide="menu" class="w-6 h-6"></i></button>
             </div>
         </div>
     </nav>
 
-    
     <!-- Mobile Sidebar Backdrop -->
     <div id="mobile-backdrop" class="fixed inset-0 bg-black/60 z-[70] opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm"></div>
 
     <!-- Mobile Sidebar -->
-    <div id="mobile-sidebar" class="fixed top-0 right-0 h-full w-[300px] bg-white dark:bg-gray-900 z-[80] transform translate-x-full transition-transform duration-500 ease-out shadow-2xl flex flex-col">
+    <div id="mobile-sidebar" class="fixed top-0 right-0 h-full w-[350px] bg-white dark:bg-gray-900 z-[80] transform translate-x-full transition-transform duration-500 ease-out shadow-2xl flex flex-col">
         <div class="px-8 py-6 w-full flex justify-between items-center border-b border-gray-100 dark:border-gray-800">
             <h2 class="text-xl font-bold tracking-widest text-dark dark:text-white uppercase">Menu</h2>
-            <button id="mobile-close-btn" class="text-gray-400 hover:text-primary transition-colors cursor-pointer p-2 -mr-2"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <button id="mobile-close-btn" class="text-gray-400 hover:text-primary transition-colors cursor-pointer p-2 -mr-2 outline-none"><i data-lucide="x" class="w-6 h-6"></i></button>
         </div>
         <div class="flex flex-col p-8 space-y-6 text-sm font-bold tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400">
             <a href="index.html" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Home</a>
-            <a href="index.html#shop" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Shop</a>
+            <a href="shop.html" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Shop</a>
+            <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Collection</a>
             <a href="about.html" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">About</a>
+            <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Blog</a>
             <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Contact Us</a>
+        </div>
+        <div class="px-8 pb-6 text-sm font-bold tracking-widest flex flex-col space-y-6">
+            <a href="cart.html" class="flex items-center hover:text-primary dark:text-white transition-colors border-t border-gray-100 dark:border-gray-800 pt-6">
+                <i data-lucide="shopping-bag" class="w-5 h-5 mr-3"></i> Cart (<span id="cart-count">0</span>)
+            </a>
+            <a href="#" class="flex items-center hover:text-primary dark:text-white transition-colors">
+                <i data-lucide="user" class="w-5 h-5 mr-3"></i> My Account
+            </a>
         </div>
         <div class="mt-auto p-8 border-t border-gray-100 dark:border-gray-800 flex justify-center space-x-6 text-gray-400">
             <i data-lucide="instagram" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
             <i data-lucide="facebook" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
+            <i data-lucide="twitter" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
         </div>
     </div>
-<!-- Hero Banner (The Vision) -->
+
+
+    
+    <!-- Hero Banner (The Vision) -->
     <header class="relative w-full h-[60vh] flex items-center justify-center overflow-hidden bg-dark">
         <div class="absolute inset-0 z-0">
             <img src="./assets/images/about_hero.webp" alt="About KOTRE"
@@ -201,7 +189,7 @@
                 <ul class="space-y-4 text-sm text-gray-500 dark:text-gray-400">
                     <li><a href="index.html" class="hover:text-primary transition-colors">Home</a></li>
                     <li><a href="about.html" class="hover:text-primary transition-colors">About Us</a></li>
-                    <li><a href="index.html#shop" class="hover:text-primary transition-colors">Shop</a></li>
+                    <li><a href="shop.html" class="hover:text-primary transition-colors">Shop</a></li>
                     <li><a href="#" class="hover:text-primary transition-colors">Contact</a></li>
                 </ul>
             </div>

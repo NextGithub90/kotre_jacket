@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // === Navbar Scroll ===
     const navbar = document.getElementById('navbar');
-    if (navbar) {
+    if (navbar && navbar.classList.contains('bg-transparent')) {
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
                 navbar.classList.remove('bg-transparent', 'text-white', 'py-6');
@@ -263,4 +263,87 @@ document.addEventListener("DOMContentLoaded", (event) => {
             }
         }
     });
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (typeof galleryDB !== 'undefined') {
+        const grid = document.getElementById('product-grid');
+        if (grid) {
+            grid.innerHTML = galleryDB.map(item => `
+                <a href="detail_product.html" class="gs-product group cursor-pointer block">
+                    <div class="relative overflow-hidden mb-6 bg-secondary rounded-sm aspect-[4/5] flex items-center justify-center p-4">
+                        <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal group-hover:scale-110 transition-transform duration-700 ease-out" loading="lazy" decoding="async">
+                        <div class="absolute top-4 left-4 bg-white text-dark text-xs font-bold px-3 py-1 shadow-sm uppercase tracking-widest">${item.tag}</div>
+                        <button class="absolute bottom-6 left-1/2 -translate-x-1/2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-dark text-white px-8 py-3 text-sm font-bold tracking-widest uppercase hover:bg-primary shadow-lg add-to-cart-btn" data-price="${item.price.replace('$', '')}">Add to Cart</button>
+                    </div>
+                    <div class="text-center px-4">
+                        <h3 class="text-lg font-bold text-dark dark:text-gray-100 mb-2 font-sans tracking-wide group-hover:text-primary transition-colors">${item.name}</h3>
+                        <p class="text-gray-500 dark:text-gray-400 font-bold mb-3">${item.price}</p>
+                        <div class="flex items-center justify-center space-x-1">
+                            <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-current"></i>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+            
+            // Re-bind cart listeners for dynamically added buttons
+            bindCartListeners();
+        }
+    }
+});
+
+function bindCartListeners() {
+    const addBtns = document.querySelectorAll('.add-to-cart-btn');
+    addBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            if (window.addToCartPage) {
+                window.addToCartPage(btn.getAttribute('data-price'));
+            } else if (typeof addToCart !== 'undefined') {
+                addToCart(btn.getAttribute('data-price'));
+            }
+        });
+    });
+}
+
+
+// Shop grid injection
+document.addEventListener("DOMContentLoaded", () => {
+    if (typeof galleryDB !== 'undefined') {
+        const fullGrid = document.getElementById('dynamic-full-grid');
+        const homeGrid = document.getElementById('product-grid');
+        
+        function drawCards(database) {
+            return database.map(item => `
+                <a href="detail_product.html" class="gs-product group cursor-pointer block relative">
+                    <div class="relative overflow-hidden mb-4 bg-secondary dark:bg-black rounded-sm aspect-[4/5] flex items-center justify-center p-2">
+                        <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy" decoding="async">
+                        <div class="absolute top-4 left-4 bg-white dark:bg-gray-800 text-dark dark:text-white text-[10px] font-bold px-2 py-1 shadow-sm uppercase tracking-widest">${item.tag}</div>
+                        <button class="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-dark text-white px-6 py-2 text-xs font-bold tracking-widest uppercase hover:bg-primary shadow-lg add-to-cart-btn" data-price="${item.price.replace('$', '')}">Add to Cart</button>
+                    </div>
+                    <div class="text-center px-2">
+                        <h3 class="text-sm font-bold text-dark dark:text-gray-100 mb-1 font-sans tracking-wide group-hover:text-primary transition-colors">${item.name}</h3>
+                        <p class="text-gray-500 dark:text-gray-400 font-bold text-xs mb-2">${item.price}</p>
+                    </div>
+                </a>
+            `).join('');
+        }
+        
+        if (fullGrid) {
+            fullGrid.innerHTML = drawCards(galleryDB);
+        }
+        if (homeGrid) {
+            // Only show first 8 items on the homepage
+            homeGrid.innerHTML = drawCards(galleryDB.slice(0, 8));
+        }
+        
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
 });
