@@ -213,6 +213,78 @@
     <script src="./js/main.js"></script>
     <script>
         lucide.createIcons();
+
+        // Cart Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const rows = document.querySelectorAll('.flex.flex-col.md\\:grid.md\\:grid-cols-12');
+            
+            function updateCart() {
+                let total = 0;
+                let count = 0;
+                const activeRows = document.querySelectorAll('.flex.flex-col.md\\:grid.md\\:grid-cols-12.py-6.border-b');
+                
+                activeRows.forEach(row => {
+                    const priceText = row.querySelector('.text-gray-600').innerText;
+                    const priceMatch = priceText.match(/[\d,.]+/);
+                    if (priceMatch) {
+                        const price = parseFloat(priceMatch[0].replace(/,/g, ''));
+                        const qtyInput = row.querySelector('input');
+                        let qty = 1;
+                        if (qtyInput) qty = parseInt(qtyInput.value) || 1;
+                        
+                        total += price * qty;
+                        count += qty;
+                        
+                        // update the row's total text
+                        const totalEls = row.querySelectorAll('.md\\:text-center.font-bold.text-dark');
+                        if (totalEls.length > 0) {
+                            totalEls[0].innerHTML = `<span class="md:hidden text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Total</span>$${(price * qty).toFixed(2)}`;
+                        }
+                    }
+                });
+                
+                // Update Order Summary
+                const summaryContainer = document.querySelector('.bg-white.p-8.shadow-sm, .dark\\:bg-gray-900.p-8.shadow-sm');
+                if (summaryContainer) {
+                    const summaryLines = summaryContainer.querySelectorAll('.flex.justify-between');
+                    if (summaryLines.length >= 3) {
+                        summaryLines[0].querySelector('span:nth-child(1)').innerText = `Subtotal (${count} items)`;
+                        summaryLines[0].querySelector('span:nth-child(2)').innerText = `$${total.toFixed(2)}`;
+                        summaryLines[2].querySelector('span:nth-child(2)').innerText = `$${total.toFixed(2)}`;
+                    }
+                }
+            }
+
+            rows.forEach(row => {
+                // Remove Button
+                const removeBtn = row.querySelector('button.text-red-500');
+                if (removeBtn) {
+                    removeBtn.addEventListener('click', () => {
+                        gsap.to(row, {
+                            opacity: 0, x: -50, duration: 0.3, onComplete: () => {
+                                row.remove();
+                                updateCart();
+                            }
+                        });
+                    });
+                }
+                
+                // Quantity Buttons
+                const qtyBtns = row.querySelectorAll('button.px-2.py-1');
+                const qtyInput = row.querySelector('input');
+                if (qtyBtns.length >= 2 && qtyInput) {
+                    qtyBtns[0].addEventListener('click', () => {
+                        let val = parseInt(qtyInput.value);
+                        if (val > 1) { qtyInput.value = val - 1; updateCart(); }
+                    });
+                    qtyBtns[1].addEventListener('click', () => {
+                        let val = parseInt(qtyInput.value);
+                        qtyInput.value = val + 1; updateCart();
+                    });
+                }
+            });
+        });
+
     </script>
 </body>
 

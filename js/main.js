@@ -266,35 +266,78 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    if (typeof galleryDB !== 'undefined') {
-        const grid = document.getElementById('product-grid');
-        if (grid) {
-            grid.innerHTML = galleryDB.map(item => `
-                <a href="detail_product.html" class="gs-product group cursor-pointer block">
-                    <div class="relative overflow-hidden mb-6 bg-secondary rounded-sm aspect-[4/5] flex items-center justify-center p-4">
-                        <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal group-hover:scale-110 transition-transform duration-700 ease-out" loading="lazy" decoding="async">
-                        <div class="absolute top-4 left-4 bg-white text-dark text-xs font-bold px-3 py-1 shadow-sm uppercase tracking-widest">${item.tag}</div>
-                        <button class="absolute bottom-6 left-1/2 -translate-x-1/2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-dark text-white px-8 py-3 text-sm font-bold tracking-widest uppercase hover:bg-primary shadow-lg add-to-cart-btn" data-price="${item.price.replace('$', '')}">Add to Cart</button>
+// Fetch and render Dynamic Products from JSON
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        const response = await fetch('./data/products.json');
+        if (!response.ok) throw new Error('Failed to fetch products');
+        const productsDB = await response.json();
+
+        const fullGrid = document.getElementById('dynamic-full-grid');
+        const homeGrid = document.querySelector('#shop .grid.gap-8'); // For Best Seller grid
+
+        function drawCards(database) {
+            return database.map(item => {
+                const coverImage = item.images && item.images.length > 0 ? item.images[0] : 'assets/images/placeholder.webp';
+                const tagLabel = item.status === 'sold' ? 'SOLD OUT' : 'AVAILABLE';
+                const cursorStyle = item.status === 'sold' ? 'cursor-not-allowed opacity-80' : 'cursor-pointer group';
+                return `
+                <a href="detail_product.html?id=${item.id}" class="gs-product block relative ${cursorStyle}">
+                    <div class="relative overflow-hidden mb-4 bg-secondary dark:bg-black rounded-sm aspect-[4/5] flex items-center justify-center p-2">
+                        <img src="${coverImage}" alt="${item.name}" class="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal ${item.status !== 'sold' ? 'group-hover:scale-105' : ''} transition-transform duration-700 ease-out" loading="lazy" decoding="async">
+                        <div class="absolute top-4 left-4 bg-white dark:bg-gray-800 text-dark dark:text-white text-[10px] font-bold px-2 py-1 shadow-sm uppercase tracking-widest ${item.status === 'sold' ? 'text-red-500' : ''}">${tagLabel}</div>
+                        ${item.status !== 'sold' ? `<button class="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-dark text-white px-6 py-2 text-xs font-bold tracking-widest uppercase hover:bg-primary shadow-lg add-to-cart-btn" data-price="${item.price.replace(/[^0-9]/g, '')}">Add to Cart</button>` : ''}
                     </div>
-                    <div class="text-center px-4">
-                        <h3 class="text-lg font-bold text-dark dark:text-gray-100 mb-2 font-sans tracking-wide group-hover:text-primary transition-colors">${item.name}</h3>
-                        <p class="text-gray-500 dark:text-gray-400 font-bold mb-3">${item.price}</p>
-                        <div class="flex items-center justify-center space-x-1">
-                            <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-current"></i>
-                            <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-current"></i>
-                        </div>
+                    <div class="text-center px-2">
+                        <h3 class="text-sm font-bold text-dark dark:text-gray-100 mb-1 font-sans tracking-wide ${item.status !== 'sold' ? 'group-hover:text-primary transition-colors' : ''}">${item.name}</h3>
+                        <p class="text-gray-500 dark:text-gray-400 font-bold text-xs mb-2">Rp ${item.price}</p>
                     </div>
                 </a>
-            `).join('');
-            if (typeof lucide !== 'undefined') lucide.createIcons();
-            
-            // Re-bind cart listeners for dynamically added buttons
-            bindCartListeners();
+            `}).join('');
         }
+
+        if (fullGrid) {
+            fullGrid.innerHTML = drawCards(productsDB);
+        }
+        if (homeGrid) {
+            // "kategori ganti hanya best seleer aja dan pakai foto yg ada di shop"
+            const tabs = document.querySelector('#shop .flex.justify-center.mb-12');
+            if (tabs) {
+                tabs.innerHTML = '<button class="text-primary border-b-2 border-primary pb-4 -mb-[18px]">Best Seller</button>';
+            }
+            homeGrid.innerHTML = drawCards(productsDB.slice(0, 8)); // 8 products for best seller
+        }
+
+        // Home Page 3 Columns (New Arrival, Featured, Best Seller)
+        const colContainers = document.querySelectorAll('.grid-cols-1.md\\:grid-cols-3 .space-y-6');
+        if (colContainers && colContainers.length >= 3) {
+            function drawListCol(db) {
+                return db.map((item) => {
+                    const coverImage = item.images && item.images.length > 0 ? item.images[0] : 'assets/images/placeholder.webp';
+                    return `
+                    <a href="detail_product.html?id=${item.id}" class="flex items-center space-x-4 group cursor-pointer">
+                        <div class="w-20 h-20 flex-shrink-0 bg-gray-50 flex items-center justify-center overflow-hidden rounded-sm border border-gray-100 dark:border-gray-800">
+                            <img src="${coverImage}" alt="${item.name}" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" decoding="async" loading="lazy">
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="text-sm font-bold text-dark dark:text-gray-100 group-hover:text-primary transition-colors truncate">${item.name}</p>
+                            <p class="text-sm font-bold text-red-500 mt-1">Rp ${item.price}</p>
+                        </div>
+                    </a>
+                    `;
+                }).join('');
+            }
+            const shuffled = [...productsDB].sort(() => 0.5 - Math.random());
+            colContainers[0].innerHTML = drawListCol(shuffled.slice(0, 3));
+            colContainers[1].innerHTML = drawListCol(shuffled.slice(3, 6));
+            colContainers[2].innerHTML = drawListCol(shuffled.slice(6, 9));
+        }
+
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+        bindCartListeners();
+
+    } catch (error) {
+        console.error("Error loading products:", error);
     }
 });
 
@@ -313,37 +356,3 @@ function bindCartListeners() {
     });
 }
 
-
-// Shop grid injection
-document.addEventListener("DOMContentLoaded", () => {
-    if (typeof galleryDB !== 'undefined') {
-        const fullGrid = document.getElementById('dynamic-full-grid');
-        const homeGrid = document.getElementById('product-grid');
-        
-        function drawCards(database) {
-            return database.map(item => `
-                <a href="detail_product.html" class="gs-product group cursor-pointer block relative">
-                    <div class="relative overflow-hidden mb-4 bg-secondary dark:bg-black rounded-sm aspect-[4/5] flex items-center justify-center p-2">
-                        <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy" decoding="async">
-                        <div class="absolute top-4 left-4 bg-white dark:bg-gray-800 text-dark dark:text-white text-[10px] font-bold px-2 py-1 shadow-sm uppercase tracking-widest">${item.tag}</div>
-                        <button class="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-dark text-white px-6 py-2 text-xs font-bold tracking-widest uppercase hover:bg-primary shadow-lg add-to-cart-btn" data-price="${item.price.replace('$', '')}">Add to Cart</button>
-                    </div>
-                    <div class="text-center px-2">
-                        <h3 class="text-sm font-bold text-dark dark:text-gray-100 mb-1 font-sans tracking-wide group-hover:text-primary transition-colors">${item.name}</h3>
-                        <p class="text-gray-500 dark:text-gray-400 font-bold text-xs mb-2">${item.price}</p>
-                    </div>
-                </a>
-            `).join('');
-        }
-        
-        if (fullGrid) {
-            fullGrid.innerHTML = drawCards(galleryDB);
-        }
-        if (homeGrid) {
-            // Only show first 8 items on the homepage
-            homeGrid.innerHTML = drawCards(galleryDB.slice(0, 8));
-        }
-        
-        if (typeof lucide !== 'undefined') lucide.createIcons();
-    }
-});
