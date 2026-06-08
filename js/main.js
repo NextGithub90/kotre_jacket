@@ -286,7 +286,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <div class="relative overflow-hidden mb-4 bg-secondary dark:bg-black rounded-sm aspect-[4/5] flex items-center justify-center p-2">
                         <img src="${coverImage}" alt="${item.name}" class="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal ${item.status !== 'sold' ? 'group-hover:scale-105' : ''} transition-transform duration-700 ease-out" loading="lazy" decoding="async">
                         <div class="absolute top-4 left-4 bg-white dark:bg-gray-800 text-dark dark:text-white text-[10px] font-bold px-2 py-1 shadow-sm uppercase tracking-widest ${item.status === 'sold' ? 'text-red-500' : ''}">${tagLabel}</div>
-                        ${item.status !== 'sold' ? `<button class="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-dark text-white px-6 py-2 text-xs font-bold tracking-widest uppercase hover:bg-primary shadow-lg add-to-cart-btn" data-price="${item.price.replace(/[^0-9]/g, '')}">Add to Cart</button>` : ''}
+                        ${item.status !== 'sold' ? `<button class="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-dark text-white px-6 py-2 text-xs font-bold tracking-widest uppercase hover:bg-primary shadow-lg add-to-cart-btn" data-id="${item.id}" data-name="${item.name}" data-image="${coverImage}" data-price="${item.price.replace(/[^0-9]/g, '')}">Add to Cart</button>` : ''}
                     </div>
                     <div class="text-center px-2">
                         <h3 class="text-sm font-bold text-dark dark:text-gray-100 mb-1 font-sans tracking-wide ${item.status !== 'sold' ? 'group-hover:text-primary transition-colors' : ''}">${item.name}</h3>
@@ -341,12 +341,41 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
+window.updateCartCountGlobal = function() {
+    let cart = JSON.parse(localStorage.getItem('cartGlobal') || '[]');
+    let totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+    const cartCountEls = document.querySelectorAll('span#cart-count, a[href="cart.html"] span#cart-count, .cart-count-badge');
+    cartCountEls.forEach(el => el.innerText = totalQty);
+};
+document.addEventListener('DOMContentLoaded', window.updateCartCountGlobal);
+
 function bindCartListeners() {
     const addBtns = document.querySelectorAll('.add-to-cart-btn');
     addBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             e.preventDefault();
+            
+            const product = {
+                id: btn.getAttribute('data-id'),
+                name: btn.getAttribute('data-name'),
+                price: parseFloat(((btn.getAttribute('data-price') || '0') + '').replace(/[^0-9]/g, '')),
+                image: btn.getAttribute('data-image'),
+                qty: 1
+            };
+            
+            if(product.id) {
+                let cart = JSON.parse(localStorage.getItem('cartGlobal') || '[]');
+                const existing = cart.find(p => p.id === product.id);
+                if(existing) {
+                    existing.qty += 1;
+                } else {
+                    cart.push(product);
+                }
+                localStorage.setItem('cartGlobal', JSON.stringify(cart));
+                window.updateCartCountGlobal();
+            }
+
             if (window.addToCartPage) {
                 window.addToCartPage(btn.getAttribute('data-price'));
             } else if (typeof addToCart !== 'undefined') {
@@ -355,4 +384,3 @@ function bindCartListeners() {
         });
     });
 }
-

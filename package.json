@@ -1,7 +1,6 @@
 {
-  "name": "kotre_jacket",
+  "name": "syupermarket_jacket",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,5 +10,9 @@
   "license": "ISC",
   "devDependencies": {
     "tailwindcss": "^4.3.0"
-  }
+  },
+  "dependencies": {
+    "midtrans-client": "^1.4.3"
+  },
+  "description": ""
 }

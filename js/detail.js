@@ -29,10 +29,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         const mainImageEl = document.getElementById('detail-main-img');
         const thumbnailsContainer = document.getElementById('detail-thumbnails');
         const descEl = document.getElementById('detail-desc');
-        const btnCart = document.getElementById('btn-add-cart'); // The buy btn
+        const btnCart = document.getElementById('btn-add-cart'); // The Add to Cart btn
+        const btnBuyNow = document.getElementById('btn-buy-now'); // The Buy It Now btn
 
         // --- Populate Text Data ---
-        document.title = `${product.name} - KOTRE`;
+        document.title = `${product.name} - SYUPERMARKET`;
         nameEls.forEach(el => el.innerText = product.name);
 
         if (priceEl) priceEl.innerText = `Rp ${product.price}`;
@@ -82,6 +83,58 @@ document.addEventListener("DOMContentLoaded", async () => {
                     e.target.classList.remove('border-transparent');
                 });
             });
+        }
+
+
+        // Add to Cart global binding
+        if (btnCart && product.status !== 'sold') {
+            btnCart.addEventListener('click', (e) => {
+                const pInfo = {
+                    id: product.id,
+                    name: product.name,
+                    price: parseFloat((product.price + '').replace(/[^0-9]/g, '')),
+                    image: (product.images && product.images.length > 0) ? product.images[0] : 'assets/images/placeholder.webp',
+                    qty: 1
+                };
+                let cart = JSON.parse(localStorage.getItem('cartGlobal') || '[]');
+                const existing = cart.find(p => p.id === pInfo.id);
+                if (existing) { existing.qty += 1; } else { cart.push(pInfo); }
+                localStorage.setItem('cartGlobal', JSON.stringify(cart));
+                if (window.updateCartCountGlobal) window.updateCartCountGlobal();
+
+                // Show notification if needed, usually main.js handles grid but detail.js needs this
+                if (typeof addToCart !== 'undefined') {
+                    addToCart(pInfo.price);
+                }
+            });
+        }
+
+        // Buy It Now logic
+        if (btnBuyNow) {
+            if (product.status === 'sold') {
+                btnBuyNow.disabled = true;
+                btnBuyNow.innerText = "SOLD OUT";
+                btnBuyNow.className = "w-full bg-gray-300 text-gray-500 py-4 font-bold uppercase tracking-widest text-sm mb-8 rounded-sm cursor-not-allowed";
+            } else {
+                btnBuyNow.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pInfo = {
+                        id: product.id,
+                        name: product.name,
+                        price: parseFloat((product.price + '').replace(/[^0-9]/g, '')),
+                        image: (product.images && product.images.length > 0) ? product.images[0] : 'assets/images/placeholder.webp',
+                        qty: 1
+                    };
+
+                    if (window.openPaymentModal) {
+                        window.openPaymentModal({
+                            source: 'buynow',
+                            items: [pInfo],
+                            total: pInfo.price
+                        });
+                    }
+                });
+            }
         }
 
         // --- Related Products ---

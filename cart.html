@@ -1,291 +1,316 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+            <html lang="en" class="scroll-smooth">
 
-<head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart - KOTRE</title>
-    <!-- Tailwind CSS (CDN) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['"Nunito Sans"', 'sans-serif'] },
-                    colors: { primary: '#4361ee', secondary: '#f8f9fa', dark: '#212529', 'soft-blue': '#edf2fb', 'muted-blue': '#ccdbfd' }
-                }
-            }
-        }
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&display=swap');
-
-        body {
-            font-family: 'Nunito Sans', sans-serif;
-            overflow-x: hidden;
-        }
-
-        .smooth-transition {
-            transition: all 0.3s ease-in-out;
-        }
-    </style>
-    
-    <!-- GSAP for Animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-
-<body class="bg-gray-50 text-dark dark:text-gray-100 overflow-x-hidden min-h-screen flex flex-col">
-
-    <!-- Navbar -->
-        <nav class="w-full bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 py-6 z-50 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
-            <div class="text-2xl font-bold tracking-widest uppercase cursor-pointer">
-                <a href="index.html">KOTRE<span class="text-primary text-3xl leading-none">.</span></a>
-            </div>
-            <div class="flex items-center space-x-8 text-dark dark:text-gray-100">
-                <button id="theme-toggle" class="hover:text-primary transition-colors duration-200 cursor-pointer flex items-center justify-center outline-none"><i data-lucide="moon" class="w-5 h-5 theme-icon"></i></button>
-                <button id="mobile-menu-btn" class="hover:text-primary z-[60] relative cursor-pointer flex items-center justify-center outline-none"><i data-lucide="menu" class="w-6 h-6"></i></button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Mobile Sidebar Backdrop -->
-    <div id="mobile-backdrop" class="fixed inset-0 bg-black/60 z-[70] opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm"></div>
-
-    <!-- Mobile Sidebar -->
-    <div id="mobile-sidebar" class="fixed top-0 right-0 h-full w-[350px] bg-white dark:bg-gray-900 z-[80] transform translate-x-full transition-transform duration-500 ease-out shadow-2xl flex flex-col">
-        <div class="px-8 py-6 w-full flex justify-between items-center border-b border-gray-100 dark:border-gray-800">
-            <h2 class="text-xl font-bold tracking-widest text-dark dark:text-white uppercase">Menu</h2>
-            <button id="mobile-close-btn" class="text-gray-400 hover:text-primary transition-colors cursor-pointer p-2 -mr-2 outline-none"><i data-lucide="x" class="w-6 h-6"></i></button>
-        </div>
-        <div class="flex flex-col p-8 space-y-6 text-sm font-bold tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400">
-            <a href="index.html" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Home</a>
-            <a href="shop.html" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Shop</a>
-            <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Collection</a>
-            <a href="about.html" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">About</a>
-            <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Blog</a>
-            <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Contact Us</a>
-        </div>
-        <div class="px-8 pb-6 text-sm font-bold tracking-widest flex flex-col space-y-6">
-            <a href="cart.html" class="flex items-center hover:text-primary dark:text-white transition-colors border-t border-gray-100 dark:border-gray-800 pt-6">
-                <i data-lucide="shopping-bag" class="w-5 h-5 mr-3"></i> Cart (<span id="cart-count">0</span>)
-            </a>
-            <a href="#" class="flex items-center hover:text-primary dark:text-white transition-colors">
-                <i data-lucide="user" class="w-5 h-5 mr-3"></i> My Account
-            </a>
-        </div>
-        <div class="mt-auto p-8 border-t border-gray-100 dark:border-gray-800 flex justify-center space-x-6 text-gray-400">
-            <i data-lucide="instagram" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
-            <i data-lucide="facebook" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
-            <i data-lucide="twitter" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
-        </div>
-    </div>
-
-
-    <!-- Cart Content -->
-    <main class="flex-grow max-w-7xl mx-auto px-6 py-12 w-full grid grid-cols-1 lg:grid-cols-3 gap-12">
-
-                <!-- Cart Items -->
-        <div class="lg:col-span-2 bg-white dark:bg-gray-900 p-6 md:p-8 shadow-sm border border-gray-100 dark:border-gray-800 rounded-sm">
-            <h1 class="text-2xl font-bold font-sans text-dark dark:text-gray-100 mb-8">Shopping Cart</h1>
-
-            <!-- Table Header -->
-            <div class="hidden md:grid grid-cols-12 gap-4 pb-4 border-b border-gray-200 dark:border-gray-700 text-xs font-bold uppercase tracking-widest text-gray-400">
-                <div class="col-span-6">Product Details</div>
-                <div class="col-span-2 text-center">Quantity</div>
-                <div class="col-span-2 text-center">Price</div>
-                <div class="col-span-2 text-center">Total</div>
-            </div>
-
-            <!-- Item 1 -->
-            <div class="flex flex-col md:grid md:grid-cols-12 gap-6 md:gap-4 py-6 border-b border-gray-100 dark:border-gray-800 md:items-center relative">
-                <div class="md:col-span-6 flex items-start md:items-center space-x-4">
-                    <img src="./assets/images/brown_blazer.webp" class="w-20 md:w-20 h-28 md:h-24 aspect-[4/5] object-cover bg-gray-50 rounded-sm" decoding="async" loading="lazy">
-                    <div class="flex flex-col">
-                        <h3 class="font-bold text-dark dark:text-gray-100 text-sm mb-1 uppercase tracking-wider">Lightness Brown Winch</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Color: Brown | Size: M</p>
-                        <button class="text-xs text-red-500 font-bold hover:text-red-700 uppercase tracking-widest transition-colors flex items-center mt-2 md:mt-0"><i data-lucide="trash-2" class="w-3 h-3 mr-1"></i> Remove</button>
-                    </div>
-                </div>
-                
-                <div class="flex justify-between items-center md:col-span-6 md:grid md:grid-cols-6 md:gap-4 w-full mt-4 md:mt-0">
-                    <div class="flex flex-col md:col-span-2 md:flex-row md:justify-center items-start md:items-center">
-                        <span class="md:hidden text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Quantity</span>
-                        <div class="flex items-center border border-gray-300 w-24 rounded-sm">
-                            <button class="px-2 py-1 hover:bg-gray-50">-</button>
-                            <input type="text" value="1" class="w-full text-center outline-none font-bold text-sm bg-transparent dark:text-white" readonly>
-                            <button class="px-2 py-1 hover:bg-gray-50">+</button>
-                        </div>
-                    </div>
-                    <div class="flex flex-col md:col-span-2 text-center font-bold text-sm text-gray-600">
-                        <span class="md:hidden text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Price</span>
-                        $150.00
-                    </div>
-                    <div class="flex flex-col md:col-span-2 text-right md:text-center font-bold text-sm text-dark dark:text-gray-100">
-                        <span class="md:hidden text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Total</span>
-                        $150.00
-                    </div>
-                </div>
-            </div>
-
-            <!-- Item 2 -->
-            <div class="flex flex-col md:grid md:grid-cols-12 gap-6 md:gap-4 py-6 border-b border-gray-100 dark:border-gray-800 md:items-center relative">
-                <div class="md:col-span-6 flex items-start md:items-center space-x-4">
-                    <img src="./assets/images/hero_blazer.webp" class="w-20 md:w-20 h-28 md:h-24 aspect-[4/5] object-cover bg-muted-blue rounded-sm" decoding="async" loading="lazy">
-                    <div class="flex flex-col">
-                        <h3 class="font-bold text-dark dark:text-gray-100 text-sm mb-1 uppercase tracking-wider">Ocean Blue Suit</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Color: Blue | Size: L</p>
-                        <button class="text-xs text-red-500 font-bold hover:text-red-700 uppercase tracking-widest transition-colors flex items-center mt-2 md:mt-0"><i data-lucide="trash-2" class="w-3 h-3 mr-1"></i> Remove</button>
-                    </div>
-                </div>
-                
-                <div class="flex justify-between items-center md:col-span-6 md:grid md:grid-cols-6 md:gap-4 w-full mt-4 md:mt-0">
-                    <div class="flex flex-col md:col-span-2 md:flex-row md:justify-center items-start md:items-center">
-                        <span class="md:hidden text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Quantity</span>
-                        <div class="flex items-center border border-gray-300 w-24 rounded-sm">
-                            <button class="px-2 py-1 hover:bg-gray-50">-</button>
-                            <input type="text" value="1" class="w-full text-center outline-none font-bold text-sm bg-transparent dark:text-white" readonly>
-                            <button class="px-2 py-1 hover:bg-gray-50">+</button>
-                        </div>
-                    </div>
-                    <div class="flex flex-col md:col-span-2 text-center font-bold text-sm text-gray-600">
-                        <span class="md:hidden text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Price</span>
-                        $180.00
-                    </div>
-                    <div class="flex flex-col md:col-span-2 text-right md:text-center font-bold text-sm text-dark dark:text-gray-100">
-                        <span class="md:hidden text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Total</span>
-                        $180.00
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Order Summary -->
-        <div class="bg-white dark:bg-gray-900 p-8 shadow-sm border border-gray-100 dark:border-gray-800 rounded-sm h-fit">
-            <h2 class="text-xl font-bold mb-6 font-sans border-b border-gray-200 dark:border-gray-700 pb-4">Order Summary</h2>
-
-            <div class="flex justify-between mb-4 text-sm font-semibold text-gray-600">
-                <span>Subtotal (2 items)</span>
-                <span>$330.00</span>
-            </div>
-
-            <div class="flex justify-between mb-4 text-sm font-semibold text-gray-600 border-b border-gray-100 dark:border-gray-800 pb-4">
-                <span>Estimated Shipping</span>
-                <span class="text-green-500 font-bold">Free</span>
-            </div>
-
-            <div class="flex justify-between mb-8 text-lg font-bold text-dark dark:text-gray-100">
-                <span>Total Amount</span>
-                <span>$330.00</span>
-            </div>
-
-            <button
-                class="w-full bg-dark text-white py-4 font-bold uppercase tracking-widest text-sm hover:bg-primary transition-colors flex justify-center items-center rounded-sm shadow-md">
-                Proceed to Checkout <i data-lucide="lock" class="ml-2 w-4 h-4"></i>
-            </button>
-            <div class="flex justify-center space-x-2 mt-4 text-gray-400">
-                <i data-lucide="credit-card" class="w-8 h-8"></i>
-                <!-- Adding fake icons layout -->
-                <div
-                    class="w-8 h-8 border border-gray-200 dark:border-gray-700 rounded flex items-center justify-center font-serif font-bold text-xs">
-                    Visa</div>
-                <div
-                    class="w-8 h-8 border border-gray-200 dark:border-gray-700 rounded flex items-center justify-center font-serif font-bold text-xs">
-                    MC</div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-white dark:bg-gray-900 py-8 border-t border-gray-200 dark:border-gray-700 mt-auto text-center text-xs text-gray-400">
-        <p>&copy; 2026 KOTRE. All rights reserved.</p>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="./js/main.js"></script>
-    <script>
-        lucide.createIcons();
-
-        // Cart Logic
-        document.addEventListener('DOMContentLoaded', () => {
-            const rows = document.querySelectorAll('.flex.flex-col.md\\:grid.md\\:grid-cols-12');
-            
-            function updateCart() {
-                let total = 0;
-                let count = 0;
-                const activeRows = document.querySelectorAll('.flex.flex-col.md\\:grid.md\\:grid-cols-12.py-6.border-b');
-                
-                activeRows.forEach(row => {
-                    const priceText = row.querySelector('.text-gray-600').innerText;
-                    const priceMatch = priceText.match(/[\d,.]+/);
-                    if (priceMatch) {
-                        const price = parseFloat(priceMatch[0].replace(/,/g, ''));
-                        const qtyInput = row.querySelector('input');
-                        let qty = 1;
-                        if (qtyInput) qty = parseInt(qtyInput.value) || 1;
-                        
-                        total += price * qty;
-                        count += qty;
-                        
-                        // update the row's total text
-                        const totalEls = row.querySelectorAll('.md\\:text-center.font-bold.text-dark');
-                        if (totalEls.length > 0) {
-                            totalEls[0].innerHTML = `<span class="md:hidden text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Total</span>$${(price * qty).toFixed(2)}`;
+            <head>
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Shopping Cart - SYUPERMARKET</title>
+                <!-- Tailwind CSS (CDN) -->
+                <script src="https://cdn.tailwindcss.com"></script>
+                <script>
+                    tailwind.config = {
+                        darkMode: 'class',
+                        theme: {
+                            extend: {
+                                fontFamily: { sans: ['"Nunito Sans"', 'sans-serif'] },
+                                colors: { primary: '#4361ee', secondary: '#f8f9fa', dark: '#212529', 'soft-blue': '#edf2fb', 'muted-blue': '#ccdbfd' }
+                            }
                         }
                     }
-                });
-                
-                // Update Order Summary
-                const summaryContainer = document.querySelector('.bg-white.p-8.shadow-sm, .dark\\:bg-gray-900.p-8.shadow-sm');
-                if (summaryContainer) {
-                    const summaryLines = summaryContainer.querySelectorAll('.flex.justify-between');
-                    if (summaryLines.length >= 3) {
-                        summaryLines[0].querySelector('span:nth-child(1)').innerText = `Subtotal (${count} items)`;
-                        summaryLines[0].querySelector('span:nth-child(2)').innerText = `$${total.toFixed(2)}`;
-                        summaryLines[2].querySelector('span:nth-child(2)').innerText = `$${total.toFixed(2)}`;
-                    }
-                }
-            }
+                </script>
+                <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&display=swap');
 
-            rows.forEach(row => {
-                // Remove Button
-                const removeBtn = row.querySelector('button.text-red-500');
-                if (removeBtn) {
-                    removeBtn.addEventListener('click', () => {
-                        gsap.to(row, {
-                            opacity: 0, x: -50, duration: 0.3, onComplete: () => {
-                                row.remove();
-                                updateCart();
+                    body {
+                        font-family: 'Nunito Sans', sans-serif;
+                        overflow-x: hidden;
+                    }
+
+                    .smooth-transition {
+                        transition: all 0.3s ease-in-out;
+                    }
+                </style>
+
+                <!-- GSAP for Animations -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+                <!-- Lucide Icons -->
+                <script src="https://unpkg.com/lucide@latest"></script>
+            </head>
+
+            <body class="bg-gray-50 text-dark dark:text-gray-100 overflow-x-hidden min-h-screen flex flex-col">
+
+                <!-- Navbar -->
+                <nav class="w-full bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 py-6 z-50 transition-all duration-300"
+                    id="navbar">
+                    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+                        <div class="text-2xl font-bold tracking-widest uppercase cursor-pointer">
+                            <a href="index.html">SYUPERMARKET<span
+                                    class="text-primary text-3xl leading-none">.</span></a>
+                        </div>
+                        <div class="flex items-center space-x-8 text-dark dark:text-gray-100">
+                            <button id="theme-toggle"
+                                class="hover:text-primary transition-colors duration-200 cursor-pointer flex items-center justify-center outline-none"><i
+                                    data-lucide="moon" class="w-5 h-5 theme-icon"></i></button>
+                            <button id="mobile-menu-btn"
+                                class="hover:text-primary z-[60] relative cursor-pointer flex items-center justify-center outline-none"><i
+                                    data-lucide="menu" class="w-6 h-6"></i></button>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Mobile Sidebar Backdrop -->
+                <div id="mobile-backdrop"
+                    class="fixed inset-0 bg-black/60 z-[70] opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm">
+                </div>
+
+                <!-- Mobile Sidebar -->
+                <div id="mobile-sidebar"
+                    class="fixed top-0 right-0 h-full w-[350px] bg-white dark:bg-gray-900 z-[80] transform translate-x-full transition-transform duration-500 ease-out shadow-2xl flex flex-col">
+                    <div
+                        class="px-8 py-6 w-full flex justify-between items-center border-b border-gray-100 dark:border-gray-800">
+                        <h2 class="text-xl font-bold tracking-widest text-dark dark:text-white uppercase">Menu</h2>
+                        <button id="mobile-close-btn"
+                            class="text-gray-400 hover:text-primary transition-colors cursor-pointer p-2 -mr-2 outline-none"><i
+                                data-lucide="x" class="w-6 h-6"></i></button>
+                    </div>
+                    <div
+                        class="flex flex-col p-8 space-y-6 text-sm font-bold tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400">
+                        <a href="index.html"
+                            class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Home</a>
+                        <a href="shop.html"
+                            class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Shop</a>
+                        <a href="#"
+                            class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Collection</a>
+                        <a href="about.html"
+                            class="hover:text-dark dark:hover:text-white mobile-link transition-colors">About</a>
+                        <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Blog</a>
+                        <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Contact
+                            Us</a>
+                    </div>
+                    <div class="px-8 pb-6 text-sm font-bold tracking-widest flex flex-col space-y-6">
+                        <a href="cart.html"
+                            class="flex items-center hover:text-primary dark:text-white transition-colors border-t border-gray-100 dark:border-gray-800 pt-6">
+                            <i data-lucide="shopping-bag" class="w-5 h-5 mr-3"></i> Cart (<span
+                                id="cart-count">0</span>)
+                        </a>
+                        <a href="#" class="flex items-center hover:text-primary dark:text-white transition-colors">
+                            <i data-lucide="user" class="w-5 h-5 mr-3"></i> My Account
+                        </a>
+                    </div>
+                    <div
+                        class="mt-auto p-8 border-t border-gray-100 dark:border-gray-800 flex justify-center space-x-6 text-gray-400">
+                        <i data-lucide="instagram" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
+                        <i data-lucide="facebook" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
+                        <i data-lucide="twitter" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
+                    </div>
+                </div>
+
+
+                <!-- Cart Content -->
+                <main class="flex-grow max-w-7xl mx-auto px-6 py-12 w-full grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+                    <!-- Cart Items -->
+                    <div
+                        class="lg:col-span-2 bg-white dark:bg-gray-900 p-6 md:p-8 shadow-sm border border-gray-100 dark:border-gray-800 rounded-sm">
+                        <h1 class="text-2xl font-bold font-sans text-dark dark:text-gray-100 mb-8">Shopping Cart</h1>
+
+                        <!-- Table Header -->
+                        <div
+                            class="hidden md:grid grid-cols-12 gap-4 pb-4 border-b border-gray-200 dark:border-gray-700 text-xs font-bold uppercase tracking-widest text-gray-400">
+                            <div class="col-span-6">Product Details</div>
+                            <div class="col-span-2 text-center">Quantity</div>
+                            <div class="col-span-2 text-center">Price</div>
+                            <div class="col-span-2 text-center">Total</div>
+                        </div>
+
+
+
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div
+                        class="bg-white dark:bg-gray-900 p-8 shadow-sm border border-gray-100 dark:border-gray-800 rounded-sm h-fit">
+                        <h2 class="text-xl font-bold mb-6 font-sans border-b border-gray-200 dark:border-gray-700 pb-4">
+                            Order Summary</h2>
+
+                        <div class="flex justify-between mb-4 text-sm font-semibold text-gray-600">
+                            <span>Subtotal (0 items)</span>
+                            <span>$0.00</span>
+                        </div>
+
+                        <div
+                            class="flex justify-between mb-4 text-sm font-semibold text-gray-600 border-b border-gray-100 dark:border-gray-800 pb-4">
+                            <span>Estimated Shipping</span>
+                            <span class="text-green-500 font-bold">Free</span>
+                        </div>
+
+                        <div class="flex justify-between mb-8 text-lg font-bold text-dark dark:text-gray-100">
+                            <span>Total Amount</span>
+                            <span>$0.00</span>
+                        </div>
+
+                        <button id="btn-checkout" onclick="handleCartCheckout()"
+                            class="w-full bg-dark text-white py-4 font-bold uppercase tracking-widest text-sm hover:bg-primary transition-colors flex justify-center items-center rounded-sm shadow-md">
+                            Proceed to Checkout <i data-lucide="lock" class="ml-2 w-4 h-4"></i>
+                        </button>
+                        <div class="flex justify-center space-x-2 mt-4 text-gray-400">
+                            <i data-lucide="credit-card" class="w-8 h-8"></i>
+                            <!-- Adding fake icons layout -->
+                            <div
+                                class="w-8 h-8 border border-gray-200 dark:border-gray-700 rounded flex items-center justify-center font-serif font-bold text-xs">
+                                Visa</div>
+                            <div
+                                class="w-8 h-8 border border-gray-200 dark:border-gray-700 rounded flex items-center justify-center font-serif font-bold text-xs">
+                                MC</div>
+                        </div>
+                    </div>
+                </main>
+
+                <!-- Footer -->
+                <footer
+                    class="bg-white dark:bg-gray-900 py-8 border-t border-gray-200 dark:border-gray-700 mt-auto text-center text-xs text-gray-400">
+                    <p>&copy; 2026 SYUPERMARKET. All rights reserved.</p>
+                </footer>
+
+                <!-- Scripts -->
+                <script src="./js/payment-modal.js"></script>
+                <script src="./js/main.js?v=4"></script>
+                <script>
+                    lucide.createIcons();
+
+                    // Cart Logic
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const container = document.querySelector('.lg\\:col-span-2');
+
+                        function renderCart() {
+                            let cart = JSON.parse(localStorage.getItem('cartGlobal') || '[]');
+                            let total = 0;
+                            let count = 0;
+
+                            document.querySelectorAll('.cart-item-row, .empty-cart-state').forEach(el => el.remove());
+
+                            if (cart.length === 0) {
+                                const emptyHTML = `
+                    <div class="empty-cart-state py-20 text-center text-gray-400 font-bold tracking-widest text-sm uppercase flex flex-col items-center justify-center">
+                        <i data-lucide="shopping-cart" class="w-16 h-16 mb-4 opacity-30 text-dark dark:text-gray-100"></i>
+                        <p class="mb-6">Keranjang Anda Masih Kosong</p>
+                        <button onclick="window.location.href='shop.html'" class="border-2 border-dark text-dark dark:text-gray-100 px-8 py-3 uppercase text-xs font-bold tracking-widest hover:bg-dark hover:text-white transition-colors duration-300">
+                            Beli Jaket Sekarang
+                        </button>
+                    </div>`;
+                                container.insertAdjacentHTML('beforeend', emptyHTML);
+                                if (typeof lucide !== 'undefined') lucide.createIcons();
+                            } else {
+                                let htmlStr = '';
+                                cart.forEach((item, index) => {
+                                    const itemTotal = item.price * item.qty;
+                                    total += itemTotal;
+                                    count += item.qty;
+                                    htmlStr += `
+                        <div class="cart-item-row flex flex-col md:grid md:grid-cols-12 gap-6 md:gap-4 py-6 border-b border-gray-100 dark:border-gray-800 md:items-center relative" data-id="${item.id}">
+                            <div class="md:col-span-6 flex items-start md:items-center space-x-4">
+                                <img src="${item.image}" class="w-20 md:w-20 h-28 md:h-24 aspect-[4/5] object-cover bg-gray-50 rounded-sm" decoding="async" loading="lazy">
+                                <div class="flex flex-col">
+                                    <h3 class="font-bold text-dark dark:text-gray-100 text-sm mb-1 uppercase tracking-wider">${item.name}</h3>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Color: Standard | Size: Standard</p>
+                                    <button class="remove-btn text-xs text-red-500 font-bold hover:text-red-700 uppercase tracking-widest transition-colors flex items-center mt-2 md:mt-0" data-id="${item.id}"><i data-lucide="trash-2" class="w-3 h-3 mr-1"></i> Remove</button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center md:col-span-6 md:grid md:grid-cols-6 md:gap-4 w-full mt-4 md:mt-0">
+                                <div class="flex flex-col md:col-span-2 md:flex-row md:justify-center items-start md:items-center">
+                                    <span class="md:hidden text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Quantity</span>
+                                    <div class="flex items-center border border-gray-300 w-24 rounded-sm">
+                                        <button class="qty-btn-minus px-2 py-1 hover:bg-gray-50" data-id="${item.id}">-</button>
+                                        <input type="text" value="${item.qty}" class="w-full text-center outline-none font-bold text-sm bg-transparent dark:text-white" readonly>
+                                        <button class="qty-btn-plus px-2 py-1 hover:bg-gray-50" data-id="${item.id}">+</button>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col md:col-span-2 text-center font-bold text-sm text-gray-600">
+                                    <span class="md:hidden text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Price</span>
+                                    Rp ${item.price.toLocaleString('id-ID')}
+                                </div>
+                                <div class="flex flex-col md:col-span-2 text-right md:text-center font-bold text-sm text-dark dark:text-gray-100">
+                                    <span class="md:hidden text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Total</span>
+                                    Rp ${itemTotal.toLocaleString('id-ID')}
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                                });
+                                container.insertAdjacentHTML('beforeend', htmlStr);
+                                if (typeof lucide !== 'undefined') lucide.createIcons();
+                            }
+
+                            const summaryContainer = document.querySelector('.bg-white.p-8.shadow-sm, .dark\\:bg-gray-900.p-8.shadow-sm');
+                            if (summaryContainer) {
+                                const summaryLines = summaryContainer.querySelectorAll('.flex.justify-between');
+                                if (summaryLines.length >= 3) {
+                                    summaryLines[0].querySelector('span:nth-child(1)').innerText = `Subtotal (${count} items)`;
+                                    summaryLines[0].querySelector('span:nth-child(2)').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+                                    summaryLines[2].querySelector('span:nth-child(2)').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+                                }
+                            }
+
+                            if (window.updateCartCountGlobal) window.updateCartCountGlobal();
+                        }
+
+                        renderCart();
+
+                        container.addEventListener('click', (e) => {
+                            const removeBtn = e.target.closest('.remove-btn');
+                            const minusBtn = e.target.closest('.qty-btn-minus');
+                            const plusBtn = e.target.closest('.qty-btn-plus');
+
+                            let cart = JSON.parse(localStorage.getItem('cartGlobal') || '[]');
+
+                            if (removeBtn) {
+                                const id = removeBtn.getAttribute('data-id');
+                                cart = cart.filter(p => p.id !== id);
+                                localStorage.setItem('cartGlobal', JSON.stringify(cart));
+                                renderCart();
+                            }
+                            if (minusBtn) {
+                                const id = minusBtn.getAttribute('data-id');
+                                const item = cart.find(p => p.id === id);
+                                if (item && item.qty > 1) { item.qty--; }
+                                localStorage.setItem('cartGlobal', JSON.stringify(cart));
+                                renderCart();
+                            }
+                            if (plusBtn) {
+                                const id = plusBtn.getAttribute('data-id');
+                                const item = cart.find(p => p.id === id);
+                                if (item) { item.qty++; }
+                                localStorage.setItem('cartGlobal', JSON.stringify(cart));
+                                renderCart();
                             }
                         });
                     });
-                }
-                
-                // Quantity Buttons
-                const qtyBtns = row.querySelectorAll('button.px-2.py-1');
-                const qtyInput = row.querySelector('input');
-                if (qtyBtns.length >= 2 && qtyInput) {
-                    qtyBtns[0].addEventListener('click', () => {
-                        let val = parseInt(qtyInput.value);
-                        if (val > 1) { qtyInput.value = val - 1; updateCart(); }
-                    });
-                    qtyBtns[1].addEventListener('click', () => {
-                        let val = parseInt(qtyInput.value);
-                        qtyInput.value = val + 1; updateCart();
-                    });
-                }
-            });
-        });
 
-    </script>
-</body>
+                    // ── Cart Checkout → Payment Modal ──
+                    window.handleCartCheckout = function () {
+                        const cart = JSON.parse(localStorage.getItem('cartGlobal') || '[]');
+                        if (cart.length === 0) {
+                            alert('Keranjang kamu kosong! Tambahkan produk terlebih dahulu.');
+                            return;
+                        }
+                        const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+                        openPaymentModal({
+                            source: 'cart',
+                            items: cart.map(item => ({
+                                id: item.id,
+                                name: item.name,
+                                image: item.image,
+                                price: item.price,
+                                qty: item.qty
+                            })),
+                            total
+                        });
+                    };
+                </script>
+            </body>
 
-</html>
+            </html>
