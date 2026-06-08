@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | KOTRE BLAZER</title>
+    <!-- Tailwind CSS (CDN for immediate rendering) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Nunito Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#4361ee',
+                        secondary: '#f8f9fa',
+                        dark: '#212529',
+                        'soft-blue': '#edf2fb',
+                        'muted-blue': '#ccdbfd'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-signature {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .smooth-transition {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+
+<body class="bg-secondary dark:bg-black text-dark dark:text-gray-100">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 text-white bg-transparent py-6 transition-all duration-500 origin-top" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="text-2xl font-bold tracking-widest uppercase cursor-pointer"
+                onclick="window.location.href='index.html'">
+                KOTRE<span class="text-primary text-3xl leading-none">.</span>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-10 text-sm font-bold tracking-[0.1em] uppercase">
+                <a href="index.html" class="hover:text-primary transition-colors duration-200">Home</a>
+                <a href="index.html#shop" class="hover:text-primary transition-colors duration-200">Shop</a>
+                <a href="#" class="hover:text-primary transition-colors duration-200">Collection</a>
+                <a href="about.html" class="text-primary transition-colors duration-200">About</a>
+                <a href="#" class="hover:text-primary transition-colors duration-200">Blog</a>
+                <a href="#" class="hover:text-primary transition-colors duration-200">Contact Us</a>
+            </div>
+
+            <!-- Icons -->
+            <div class="flex items-center space-x-6">
+                <button id="theme-toggle" class="hover:text-primary transition-colors duration-200 cursor-pointer"><i data-lucide="moon" class="w-5 h-5 theme-icon"></i></button>
+                <button class="hover:text-primary transition-colors duration-200 cursor-pointer"><i data-lucide="search"
+                        class="w-5 h-5"></i></button>
+                <button class="hover:text-primary transition-colors duration-200 cursor-pointer"><i data-lucide="user"
+                        class="w-5 h-5"></i></button>
+                <button class="hover:text-primary transition-colors duration-200 cursor-pointer relative" id="cart-btn"
+                    onclick="window.location.href='cart.html'">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span id="cart-count"
+                        class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold shadow-sm">0</span>
+                </button>
+                <button id="mobile-menu-btn" class="md:hidden hover:text-primary z-[60] relative"><i data-lucide="menu"
+                        class="w-6 h-6"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    
+    <!-- Mobile Sidebar Backdrop -->
+    <div id="mobile-backdrop" class="fixed inset-0 bg-black/60 z-[70] opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm"></div>
+
+    <!-- Mobile Sidebar -->
+    <div id="mobile-sidebar" class="fixed top-0 right-0 h-full w-[300px] bg-white dark:bg-gray-900 z-[80] transform translate-x-full transition-transform duration-500 ease-out shadow-2xl flex flex-col">
+        <div class="px-8 py-6 w-full flex justify-between items-center border-b border-gray-100 dark:border-gray-800">
+            <h2 class="text-xl font-bold tracking-widest text-dark dark:text-white uppercase">Menu</h2>
+            <button id="mobile-close-btn" class="text-gray-400 hover:text-primary transition-colors cursor-pointer p-2 -mr-2"><i data-lucide="x" class="w-6 h-6"></i></button>
+        </div>
+        <div class="flex flex-col p-8 space-y-6 text-sm font-bold tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400">
+            <a href="index.html" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Home</a>
+            <a href="index.html#shop" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Shop</a>
+            <a href="about.html" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">About</a>
+            <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Contact Us</a>
+        </div>
+        <div class="mt-auto p-8 border-t border-gray-100 dark:border-gray-800 flex justify-center space-x-6 text-gray-400">
+            <i data-lucide="instagram" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
+            <i data-lucide="facebook" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
+        </div>
+    </div>
+<!-- Hero Banner (The Vision) -->
+    <header class="relative w-full h-[60vh] flex items-center justify-center overflow-hidden bg-dark">
+        <div class="absolute inset-0 z-0">
+            <img src="./assets/images/about_hero.webp" alt="About KOTRE"
+                class="w-full h-full object-cover object-center opacity-60 gs-hero-img" decoding="async" fetchpriority="high">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent"></div>
+        </div>
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto pt-20">
+            <p class="text-sm font-bold text-gray-300 tracking-[0.4em] uppercase mb-4 gs-hero-text">Our Vision</p>
+            <h1 class="text-5xl md:text-7xl font-bold text-white tracking-widest uppercase gs-hero-text">Redefining
+                Modern Tailoring</h1>
+        </div>
+    </header>
+
+    <!-- Our Story -->
+    <section class="py-24 bg-white dark:bg-gray-900 relative">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="gs-story-img overflow-hidden hidden md:block">
+                <img src="./assets/images/about_story.webp" alt="Tailoring Craft"
+                    class="w-full h-full object-cover shadow-2xl scale-110" decoding="async" fetchpriority="high">
+            </div>
+            <div class="gs-story-text">
+                <div class="w-12 h-1 bg-primary mb-8"></div>
+                <h2 class="text-4xl font-bold mb-6 tracking-tight text-dark dark:text-gray-100">The Legacy of<br>Precision & Style.</h2>
+                <p class="text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
+                    Founded with a passion for architectural silhouettes and premium fabrics, KOTRE was born from the
+                    desire to create the perfect blazer. We believe that a jacket is not just an article of clothing—it
+                    is an armor of confidence for the modern man.
+                </p>
+                <p class="text-gray-500 dark:text-gray-400 leading-relaxed mb-8">
+                    Every piece in our collection is meticulously crafted, merging traditional Savile Row tailoring
+                    techniques with contemporary, minimalist street aesthetics. We strip away the unnecessary, leaving
+                    only uncompromising quality and timeless elegance.
+                </p>
+                <p class="font-signature text-2xl text-dark dark:text-gray-100 italic">"Style is the perfection of a point of view."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Craftsmanship (Core Values) -->
+    <section class="py-24 bg-secondary dark:bg-black border-y border-gray-100 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 gs-values">
+                <h2 class="text-3xl font-bold text-dark dark:text-gray-100 tracking-wide uppercase mb-4">Our Craftsmanship</h2>
+                <p class="text-gray-500 dark:text-gray-400">The pillars that define every KOTRE creation.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+                <div class="bg-white dark:bg-gray-900 p-10 shadow-sm border border-gray-50 dark:border-gray-800 gs-value-card">
+                    <i data-lucide="scissors" class="w-10 h-10 mx-auto text-primary mb-6"></i>
+                    <h3 class="font-bold text-xl mb-4 tracking-widest uppercase">Precision Fit</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">Engineered to complement the natural lines of the
+                        body, providing unparalleled comfort without compromising sharpness.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-900 p-10 shadow-sm border border-gray-50 dark:border-gray-800 gs-value-card">
+                    <i data-lucide="gem" class="w-10 h-10 mx-auto text-primary mb-6"></i>
+                    <h3 class="font-bold text-xl mb-4 tracking-widest uppercase">Premium Cloth</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">We source only the finest wools, silks, and
+                        sustainable blends from heritage mills across Italy and the UK.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-900 p-10 shadow-sm border border-gray-50 dark:border-gray-800 gs-value-card">
+                    <i data-lucide="infinity" class="w-10 h-10 mx-auto text-primary mb-6"></i>
+                    <h3 class="font-bold text-xl mb-4 tracking-widest uppercase">Timeless Design</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">Fashion fades, but structural elegance remains. Our
+                        blazers are designed to be relevant today and classic tomorrow.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-900 py-16">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="md:col-span-1">
+                <div class="text-3xl font-bold tracking-widest uppercase mb-6">
+                    KOTRE<span class="text-primary text-4xl leading-none">.</span>
+                </div>
+                <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">Premium collection of industrial scale jackets.</p>
+                <div class="flex items-center space-x-2 text-dark dark:text-gray-100 font-bold text-lg">
+                    <i data-lucide="phone" class="w-5 h-5"></i> <span>+001 2233 456</span>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-bold uppercase tracking-wider mb-6">Links</h4>
+                <ul class="space-y-4 text-sm text-gray-500 dark:text-gray-400">
+                    <li><a href="index.html" class="hover:text-primary transition-colors">Home</a></li>
+                    <li><a href="about.html" class="hover:text-primary transition-colors">About Us</a></li>
+                    <li><a href="index.html#shop" class="hover:text-primary transition-colors">Shop</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Contact</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold uppercase tracking-wider mb-6">Policies</h4>
+                <ul class="space-y-4 text-sm text-gray-500 dark:text-gray-400">
+                    <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Returns & Refunds</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Shipping Info</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold uppercase tracking-wider mb-6">Subscribe</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Get the latest fashion news right in your inbox.</p>
+                <form class="flex border-b border-gray-300 pb-2">
+                    <input type="email" placeholder="Your email address"
+                        class="w-full bg-transparent outline-none text-sm text-dark dark:text-gray-100 placeholder-gray-400">
+                    <button type="submit" class="text-primary hover:text-dark dark:text-gray-100 transition-colors"><i data-lucide="send"
+                            class="w-5 h-5"></i></button>
+                </form>
+            </div>
+        </div>
+        <div
+            class="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-gray-100 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
+            <p>&copy; 2026 KOTRE. All rights reserved.</p>
+            <div class="flex space-x-4 mt-4 md:mt-0">
+                <i data-lucide="facebook" class="w-4 h-4 cursor-pointer hover:text-primary"></i>
+                <i data-lucide="twitter" class="w-4 h-4 cursor-pointer hover:text-primary"></i>
+                <i data-lucide="instagram" class="w-4 h-4 cursor-pointer hover:text-primary"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./js/main.js"></script>
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        
+        // About Animations
+        gsap.from(".gs-hero-text", {
+            y: 30, opacity: 0, duration: 1, stagger: 0.2, ease: "power3.out", delay: 0.2
+        });
+
+        gsap.to(".gs-hero-img", {
+            scale: 1.1, duration: 20, ease: "linear", repeat: -1, yoyo: true
+        });
+
+        gsap.from(".gs-story-img img", {
+            scrollTrigger: { trigger: ".gs-story-img", start: "top 80%" },
+            scale: 0.8, opacity: 0, duration: 1.5, ease: "power4.out"
+        });
+
+        gsap.from(".gs-story-text > *", {
+            scrollTrigger: { trigger: ".gs-story-text", start: "top 80%" },
+            y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power3.out"
+        });
+
+        gsap.from(".gs-value-card", {
+            scrollTrigger: { trigger: ".gs-values", start: "top 80%" },
+            y: 50, opacity: 0, duration: 0.8, stagger: 0.2, ease: "back.out(1.2)"
+        });
+
+        // Load cart persistence
+        const cartCount = document.getElementById('cart-count');
+        const count = localStorage.getItem('cartCount') || 0;
+        cartCount.textContent = count;
+        if (count > 0) cartCount.classList.remove('scale-0');
+        else cartCount.classList.add('scale-0');
+    </script>
+</body>
+
+</html>
