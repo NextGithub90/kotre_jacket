@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SyuAdmin - Data Analytics</title>
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Nunito Sans"', 'sans-serif'] },
+                    colors: { primary: '#4361ee', secondary: '#f8f9fa', dark: '#212529' }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700;800&display=swap');
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            overflow-x: hidden;
+        }
+    </style>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-dark dark:text-gray-100 min-h-screen">
+
+    <!-- Top Navigation -->
+    <nav class="w-full bg-white dark:bg-black border-b border-gray-100 dark:border-gray-800 py-4 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <div class="text-xl font-bold tracking-widest uppercase flex items-center">
+                <i data-lucide="shield" class="w-5 h-5 mr-3 text-primary"></i>
+                SYUPERMARKET <span class="text-gray-400 ml-2 text-sm font-normal">| Kasir Lokal</span>
+            </div>
+            <div class="flex items-center space-x-6">
+                <button id="theme-toggle" class="hover:text-primary transition-colors duration-200 outline-none">
+                    <i data-lucide="moon" class="w-5 h-5 theme-icon"></i>
+                </button>
+                <a href="index.html"
+                    class="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors">Ke
+                    Website</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Dashboard -->
+    <div class="max-w-7xl mx-auto px-6 py-10">
+
+        <div class="flex justify-between items-end mb-10">
+            <div>
+                <h1 class="text-3xl font-bold font-sans mb-2">Ringkasan Analitik</h1>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Data bersumber dari tag pembelian lokal secara
+                    manual.</p>
+            </div>
+            <button id="btn-download-csv"
+                class="bg-primary hover:bg-blue-600 text-white px-6 py-3 rounded-sm flex items-center text-sm font-bold uppercase tracking-wider shadow-lg transition-all transform hover:-translate-y-1">
+                <i data-lucide="download" class="w-4 h-4 mr-2"></i> Download Data CSV
+            </button>
+        </div>
+
+        <!-- Metric Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div
+                class="bg-white dark:bg-black p-6 rounded-sm border border-gray-100 dark:border-gray-800 shadow-sm flex items-center">
+                <div class="w-12 h-12 bg-blue-50 dark:bg-gray-800 rounded-full flex justify-center items-center mr-4">
+                    <i data-lucide="shopping-bag" class="w-6 h-6 text-primary"></i>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Produk Terjual</h3>
+                    <p id="metric-sold" class="text-2xl font-bold mt-1">0</p>
+                </div>
+            </div>
+            <div
+                class="bg-white dark:bg-black p-6 rounded-sm border border-gray-100 dark:border-gray-800 shadow-sm flex items-center">
+                <div class="w-12 h-12 bg-green-50 dark:bg-gray-800 rounded-full flex justify-center items-center mr-4">
+                    <i data-lucide="banknote" class="w-6 h-6 text-green-500"></i>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Estimasi Pendapatan</h3>
+                    <p id="metric-revenue" class="text-2xl font-bold mt-1 text-green-500">$ 0.00</p>
+                </div>
+            </div>
+            <div
+                class="bg-white dark:bg-black p-6 rounded-sm border border-gray-100 dark:border-gray-800 shadow-sm flex items-center">
+                <div class="w-12 h-12 bg-purple-50 dark:bg-gray-800 rounded-full flex justify-center items-center mr-4">
+                    <i data-lucide="package" class="w-6 h-6 text-purple-500"></i>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Total SKU di DB</h3>
+                    <p id="metric-total" class="text-2xl font-bold mt-1">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <div
+            class="bg-white dark:bg-black rounded-sm border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50">
+                <h2 class="text-sm font-bold uppercase tracking-widest">Daftar Item Terjual</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm whitespace-nowrap">
+                    <thead class="text-xs uppercase tracking-wider text-gray-500 bg-gray-50 dark:bg-gray-900/50">
+                        <tr>
+                            <th class="px-6 py-4 font-bold">ID Produk</th>
+                            <th class="px-6 py-4 font-bold">Nama Item</th>
+                            <th class="px-6 py-4 font-bold">Harga</th>
+                            <th class="px-6 py-4 font-bold">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body" class="divide-y divide-gray-100 dark:divide-gray-800">
+                        <tr>
+                            <td colspan="4" class="px-6 py-8 text-center text-gray-400 italic">Memuat data analitik...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script>
+        lucide.createIcons();
+
+        // Dark Mode Logic
+        const htmlEl = document.documentElement;
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlEl.classList.add('dark');
+        }
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            htmlEl.classList.toggle('dark');
+            const isDark = htmlEl.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            document.querySelector('.theme-icon').setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+            lucide.createIcons();
+        });
+
+        // Analytics Logic
+        let soldItems = [];
+
+        async function loadAnalytics() {
+            try {
+                // Try data/products.json first, fallback to database.json if running directly
+                let response = await fetch('./data/products.json');
+                if (!response.ok) {
+                    response = await fetch('./database.json');
+                }
+                const data = await response.json();
+
+                // Filter sold items
+                soldItems = data.filter(item => item.status === 'sold');
+
+                // Calculate Revenue
+                let revenue = 0;
+                soldItems.forEach(item => {
+                    // Extract numbers from price string like "$120.00" or "175.000" (Rupiah format)
+                    if (item.price) {
+                        // Hilangkan titik karena harga rupiah menggunakan titik untuk ribuan (e.g. 175.000 -> 175000)
+                        let rawStr = item.price.toString().replace(/\./g, '').replace(/,/g, '.');
+                        const numericPrice = parseFloat(rawStr.replace(/[^0-9.]/g, ''));
+                        if (!isNaN(numericPrice)) {
+                            revenue += numericPrice;
+                        }
+                    }
+                });
+
+                // Update Metrics
+                document.getElementById('metric-sold').textContent = soldItems.length;
+                document.getElementById('metric-total').textContent = data.length;
+                document.getElementById('metric-revenue').textContent = revenue.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' }).replace(',00', '');
+
+                // Render Table
+                const tbody = document.getElementById('table-body');
+                if (soldItems.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-gray-500 font-semibold tracking-wide">Belum ada item yang terjual.</td></tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = soldItems.map(item => `
+                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                        <td class="px-6 py-4 font-mono text-xs text-gray-500">${item.id || '-'}</td>
+                        <td class="px-6 py-4 font-bold">${item.name}</td>
+                        <td class="px-6 py-4 text-green-600 dark:text-green-400 font-bold">${item.price}</td>
+                        <td class="px-6 py-4"><span class="bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 px-2 py-1 text-xs font-bold uppercase rounded-sm tracking-wider">Terjual</span></td>
+                    </tr>
+                `).join('');
+
+            } catch (error) {
+                console.error("Failed to load analytics data", error);
+                document.getElementById('table-body').innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-red-500 font-semibold">Gagal memuat data (Harus dijalankan di server lokal, bukan file://).</td></tr>`;
+            }
+        }
+
+        // CSV Export Function
+        document.getElementById('btn-download-csv').addEventListener('click', () => {
+            if (soldItems.length === 0) {
+                alert("Tidak ada data terjual untuk diunduh.");
+                return;
+            }
+
+            // Gunakan titik koma (;) sebagai separator karena Excel region Indonesia lebih bersahabat dengan format ini
+            const separator = ';';
+            const headers = ["Nama Produk", "Harga Terjual"];
+
+            const csvRows = [];
+            csvRows.push(headers.join(separator));
+
+            soldItems.forEach(item => {
+                const name = `"${(item.name || '').replace(/"/g, '""')}"`;
+                const price = `"${(item.price || '').replace(/"/g, '""')}"`;
+
+                csvRows.push([name, price].join(separator));
+            });
+
+            csvRows.push("");
+            csvRows.push(`"TOTAL BARANG"${separator}"${soldItems.length}"`);
+
+            const csvString = csvRows.join('\n');
+            // Tambahkan BOM (Byte Order Mark) "\uFEFF" agar Excel bisa membaca karakter unik (UTF-8) dengan sempurna tanpa rusak
+            const blob = new Blob(["\uFEFF" + csvString], { type: 'text/csv;charset=utf-8;' });
+
+            // Create download link element
+            const link = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", `Data_Penjualan_Syupermarket_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        // Initialize
+        loadAnalytics();
+    </script>
+</body>
+
+</html>
