@@ -1,199 +1,256 @@
-            <html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 
-            <head>
-                <link rel="preconnect" href="https://fonts.googleapis.com">
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Shopping Cart - SYUPERMARKET</title>
-                <!-- Tailwind CSS (CDN) -->
-                <script src="https://cdn.tailwindcss.com"></script>
-                <script>
-                    tailwind.config = {
-                        darkMode: 'class',
-                        theme: {
-                            extend: {
-                                fontFamily: { sans: ['"Nunito Sans"', 'sans-serif'] },
-                                colors: { primary: '#4361ee', secondary: '#f8f9fa', dark: '#212529', 'soft-blue': '#edf2fb', 'muted-blue': '#ccdbfd' }
-                            }
-                        }
-                    }
-                </script>
-                <style>
-                    @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&display=swap');
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - SYUPERMARKET</title>
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Nunito Sans"', 'sans-serif'] },
+                    colors: { primary: '#4361ee', secondary: '#f8f9fa', dark: '#212529', 'soft-blue': '#edf2fb', 'muted-blue': '#ccdbfd' }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&display=swap');
 
-                    body {
-                        font-family: 'Nunito Sans', sans-serif;
-                        overflow-x: hidden;
-                    }
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            overflow-x: hidden;
+        }
 
-                    .smooth-transition {
-                        transition: all 0.3s ease-in-out;
-                    }
-                </style>
+        .smooth-transition {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
 
-                <!-- GSAP for Animations -->
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-                <!-- Lucide Icons -->
-                <script src="https://unpkg.com/lucide@latest"></script>
-            </head>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
 
-            <body class="bg-gray-50 text-dark dark:text-gray-100 overflow-x-hidden min-h-screen flex flex-col">
+<body class="bg-gray-50 text-dark dark:text-gray-100 overflow-x-hidden min-h-screen flex flex-col">
 
-                <!-- Navbar -->
-                <nav class="w-full bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 py-6 z-50 transition-all duration-300"
-                    id="navbar">
-                    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
-                        <div class="text-2xl font-bold tracking-widest uppercase cursor-pointer">
-                            <a href="index.html">SYUPERMARKET<span
-                                    class="text-primary text-3xl leading-none">.</span></a>
-                        </div>
-                        <div class="flex items-center space-x-8 text-dark dark:text-gray-100">
-                            <button id="theme-toggle"
-                                class="hover:text-primary transition-colors duration-200 cursor-pointer flex items-center justify-center outline-none"><i
-                                    data-lucide="moon" class="w-5 h-5 theme-icon"></i></button>
-                            <button id="mobile-menu-btn"
-                                class="hover:text-primary z-[60] relative cursor-pointer flex items-center justify-center outline-none"><i
-                                    data-lucide="menu" class="w-6 h-6"></i></button>
-                        </div>
-                    </div>
-                </nav>
+    <!-- Navbar -->
+    <nav class="w-full bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 py-6 z-50 transition-all duration-300"
+        id="navbar">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <div class="text-2xl font-bold tracking-widest uppercase cursor-pointer">
+                <a href="index.html">SYUPERMARKET<span class="text-primary text-3xl leading-none">.</span></a>
+            </div>
+            <div class="flex items-center space-x-8 text-dark dark:text-gray-100">
+                <button id="theme-toggle"
+                    class="hover:text-primary transition-colors duration-200 cursor-pointer flex items-center justify-center outline-none"><i
+                        data-lucide="moon" class="w-5 h-5 theme-icon"></i></button>
+                <button id="mobile-menu-btn"
+                    class="hover:text-primary z-[60] relative cursor-pointer flex items-center justify-center outline-none"><i
+                        data-lucide="menu" class="w-6 h-6"></i></button>
+            </div>
+        </div>
+    </nav>
 
-                <!-- Mobile Sidebar Backdrop -->
-                <div id="mobile-backdrop"
-                    class="fixed inset-0 bg-black/60 z-[70] opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm">
+    <!-- Mobile Sidebar Backdrop -->
+    <div id="mobile-backdrop"
+        class="fixed inset-0 bg-black/60 z-[70] opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm">
+    </div>
+
+    <!-- Mobile Sidebar -->
+    <div id="mobile-sidebar"
+        class="fixed top-0 right-0 h-full w-[350px] bg-white dark:bg-gray-900 z-[80] transform translate-x-full transition-transform duration-500 ease-out shadow-2xl flex flex-col">
+        <div class="px-8 py-6 w-full flex justify-between items-center border-b border-gray-100 dark:border-gray-800">
+            <h2 class="text-xl font-bold tracking-widest text-dark dark:text-white uppercase">Menu</h2>
+            <button id="mobile-close-btn"
+                class="text-gray-400 hover:text-primary transition-colors cursor-pointer p-2 -mr-2 outline-none"><i
+                    data-lucide="x" class="w-6 h-6"></i></button>
+        </div>
+        <div
+            class="flex flex-col p-8 space-y-6 text-sm font-bold tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400">
+            <a href="index.html" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Beranda</a>
+            <a href="shop.html" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Belanja</a>
+            <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Koleksi</a>
+            <a href="about.html" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Tentang</a>
+            <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Blog</a>
+            <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Contact
+                Us</a>
+        </div>
+        <div class="px-8 pb-6 text-sm font-bold tracking-widest flex flex-col space-y-6">
+            <a href="cart.html"
+                class="flex items-center hover:text-primary dark:text-white transition-colors border-t border-gray-100 dark:border-gray-800 pt-6">
+                <i data-lucide="shopping-bag" class="w-5 h-5 mr-3"></i> Cart (<span id="cart-count">0</span>)
+            </a>
+            <a href="#" class="flex items-center hover:text-primary dark:text-white transition-colors">
+                <i data-lucide="user" class="w-5 h-5 mr-3"></i> My Account
+            </a>
+        </div>
+        <div
+            class="mt-auto p-8 border-t border-gray-100 dark:border-gray-800 flex justify-center space-x-6 text-gray-400">
+            <i data-lucide="instagram" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
+            <i data-lucide="facebook" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
+            <i data-lucide="twitter" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
+        </div>
+    </div>
+
+
+    <!-- Cart Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-6 py-12 w-full grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+        <!-- Cart Items -->
+        <div
+            class="lg:col-span-2 bg-white dark:bg-gray-900 p-6 md:p-8 shadow-sm border border-gray-100 dark:border-gray-800 rounded-sm">
+            <h1 class="text-2xl font-bold font-sans text-dark dark:text-gray-100 mb-8">Keranjang Belanja</h1>
+
+            <!-- Table Header -->
+            <div
+                class="hidden md:grid grid-cols-12 gap-4 pb-4 border-b border-gray-200 dark:border-gray-700 text-xs font-bold uppercase tracking-widest text-gray-400">
+                <div class="col-span-6">Detail Produk</div>
+                <div class="col-span-2 text-center">Kuantitas</div>
+                <div class="col-span-2 text-center">Harga</div>
+                <div class="col-span-2 text-center">Total</div>
+            </div>
+
+
+
+        </div>
+
+        <!-- Order Summary -->
+        <div
+            class="bg-white dark:bg-gray-900 p-8 shadow-sm border border-gray-100 dark:border-gray-800 rounded-sm h-fit">
+            <h2 class="text-xl font-bold mb-6 font-sans border-b border-gray-200 dark:border-gray-700 pb-4">
+                Order Summary</h2>
+
+            <div class="flex justify-between mb-4 text-sm font-semibold text-gray-600">
+                <span>Subtotal (0 item)</span>
+                <span>$0.00</span>
+            </div>
+
+            <div
+                class="flex justify-between mb-4 text-sm font-semibold text-gray-600 border-b border-gray-100 dark:border-gray-800 pb-4">
+                <span>Estimasi Pengiriman</span>
+                <span class="text-green-500 font-bold">Gratis</span>
+            </div>
+
+            <div class="flex justify-between mb-8 text-lg font-bold text-dark dark:text-gray-100">
+                <span>Total Harga</span>
+                <span>$0.00</span>
+            </div>
+
+            <button id="btn-checkout" onclick="handleCartCheckout()"
+                class="w-full bg-dark text-white py-4 font-bold uppercase tracking-widest text-sm hover:bg-primary transition-colors flex justify-center items-center rounded-sm shadow-md">
+                Lanjut ke Pembayaran <i data-lucide="lock" class="ml-2 w-4 h-4"></i>
+            </button>
+            <div class="flex justify-center space-x-2 mt-4 text-gray-400">
+                <i data-lucide="credit-card" class="w-8 h-8"></i>
+                <!-- Adding fake icons layout -->
+                <div
+                    class="w-8 h-8 border border-gray-200 dark:border-gray-700 rounded flex items-center justify-center font-serif font-bold text-xs">
+                    Visa</div>
+                <div
+                    class="w-8 h-8 border border-gray-200 dark:border-gray-700 rounded flex items-center justify-center font-serif font-bold text-xs">
+                    MC</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-900 py-16">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 text-left">
+            <div class="md:col-span-1">
+                <div class="text-3xl font-bold tracking-widest uppercase mb-6">
+                    SYUPERMARKET<span class="text-primary text-4xl leading-none">.</span>
                 </div>
-
-                <!-- Mobile Sidebar -->
-                <div id="mobile-sidebar"
-                    class="fixed top-0 right-0 h-full w-[350px] bg-white dark:bg-gray-900 z-[80] transform translate-x-full transition-transform duration-500 ease-out shadow-2xl flex flex-col">
-                    <div
-                        class="px-8 py-6 w-full flex justify-between items-center border-b border-gray-100 dark:border-gray-800">
-                        <h2 class="text-xl font-bold tracking-widest text-dark dark:text-white uppercase">Menu</h2>
-                        <button id="mobile-close-btn"
-                            class="text-gray-400 hover:text-primary transition-colors cursor-pointer p-2 -mr-2 outline-none"><i
-                                data-lucide="x" class="w-6 h-6"></i></button>
-                    </div>
-                    <div
-                        class="flex flex-col p-8 space-y-6 text-sm font-bold tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400">
-                        <a href="index.html"
-                            class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Home</a>
-                        <a href="shop.html"
-                            class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Shop</a>
-                        <a href="#"
-                            class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Collection</a>
-                        <a href="about.html"
-                            class="hover:text-dark dark:hover:text-white mobile-link transition-colors">About</a>
-                        <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Blog</a>
-                        <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Contact
-                            Us</a>
-                    </div>
-                    <div class="px-8 pb-6 text-sm font-bold tracking-widest flex flex-col space-y-6">
-                        <a href="cart.html"
-                            class="flex items-center hover:text-primary dark:text-white transition-colors border-t border-gray-100 dark:border-gray-800 pt-6">
-                            <i data-lucide="shopping-bag" class="w-5 h-5 mr-3"></i> Cart (<span
-                                id="cart-count">0</span>)
-                        </a>
-                        <a href="#" class="flex items-center hover:text-primary dark:text-white transition-colors">
-                            <i data-lucide="user" class="w-5 h-5 mr-3"></i> My Account
-                        </a>
-                    </div>
-                    <div
-                        class="mt-auto p-8 border-t border-gray-100 dark:border-gray-800 flex justify-center space-x-6 text-gray-400">
-                        <i data-lucide="instagram" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
-                        <i data-lucide="facebook" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
-                        <i data-lucide="twitter" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
-                    </div>
+                <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">Koleksi premium jaket thrift kualitas terbaik.
+                </p>
+                <div class="flex flex-col space-y-3 mt-4 text-dark dark:text-gray-100 text-sm">
+                    <a href="tel:085846681576" class="flex items-center space-x-3 hover:text-primary transition-colors">
+                        <i data-lucide="phone" class="w-5 h-5 text-primary"></i>
+                        <span class="font-bold">0858 4668 1576</span>
+                    </a>
+                    <a href="https://wa.me/6288971950875" target="_blank"
+                        class="flex items-center space-x-3 hover:text-green-500 transition-colors">
+                        <i data-lucide="message-circle" class="w-5 h-5 text-green-500"></i>
+                        <span class="font-bold">0889 7195 0875</span>
+                    </a>
+                    <a href="mailto:syupermarketstore@gmail.com"
+                        class="flex items-center space-x-3 hover:text-primary transition-colors">
+                        <i data-lucide="mail" class="w-5 h-5 text-primary"></i>
+                        <span class="font-medium text-xs">syupermarketstore@gmail.com</span>
+                    </a>
                 </div>
+            </div>
 
+            <div>
+                <h4 class="font-bold uppercase tracking-wider mb-6">Tautan</h4>
+                <ul class="space-y-4 text-sm text-gray-500 dark:text-gray-400">
+                    <li><a href="index.html" class="hover:text-primary transition-colors">Beranda</a></li>
+                    <li><a href="about.html" class="hover:text-primary transition-colors">Tentang Kami</a></li>
+                    <li><a href="shop.html" class="hover:text-primary transition-colors">Belanja</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Kontak</a></li>
+                </ul>
+            </div>
 
-                <!-- Cart Content -->
-                <main class="flex-grow max-w-7xl mx-auto px-6 py-12 w-full grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div>
+                <h4 class="font-bold uppercase tracking-wider mb-6">Kebijakan</h4>
+                <ul class="space-y-4 text-sm text-gray-500 dark:text-gray-400">
+                    <li><a href="#" class="hover:text-primary transition-colors">Kebijakan Privasi</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Syarat & Ketentuan</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Pengembalian Dana</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Info Pengiriman</a></li>
+                </ul>
+            </div>
 
-                    <!-- Cart Items -->
-                    <div
-                        class="lg:col-span-2 bg-white dark:bg-gray-900 p-6 md:p-8 shadow-sm border border-gray-100 dark:border-gray-800 rounded-sm">
-                        <h1 class="text-2xl font-bold font-sans text-dark dark:text-gray-100 mb-8">Shopping Cart</h1>
+            <div>
+                <h4 class="font-bold uppercase tracking-wider mb-6">Berlangganan</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Get the latest fashion news right in your
+                    inbox.</p>
+                <form class="flex border-b border-gray-300 pb-2">
+                    <input type="email" placeholder="Alamat email Anda"
+                        class="w-full bg-transparent outline-none text-sm text-dark dark:text-gray-100 placeholder-gray-400">
+                    <button type="button" class="text-primary hover:text-dark dark:text-gray-100 transition-colors"><i
+                            data-lucide="send" class="w-5 h-5"></i></button>
+                </form>
+            </div>
+        </div>
+        <div
+            class="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-gray-100 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
+            <p>&copy; 2026 SYUPERMARKET. Seluruh hak cipta dilindungi Undang-Undang.</p>
+            <div class="flex space-x-4 mt-4 md:mt-0">
+                <i data-lucide="facebook" class="w-4 h-4 cursor-pointer hover:text-primary"></i>
+                <i data-lucide="twitter" class="w-4 h-4 cursor-pointer hover:text-primary"></i>
+                <i data-lucide="instagram" class="w-4 h-4 cursor-pointer hover:text-primary"></i>
+            </div>
+        </div>
+    </footer>
 
-                        <!-- Table Header -->
-                        <div
-                            class="hidden md:grid grid-cols-12 gap-4 pb-4 border-b border-gray-200 dark:border-gray-700 text-xs font-bold uppercase tracking-widest text-gray-400">
-                            <div class="col-span-6">Product Details</div>
-                            <div class="col-span-2 text-center">Quantity</div>
-                            <div class="col-span-2 text-center">Price</div>
-                            <div class="col-span-2 text-center">Total</div>
-                        </div>
+    <!-- Scripts -->
+    <script src="./js/payment-modal.js"></script>
+    <script src="./js/main.js?v=4"></script>
+    <script>
+        lucide.createIcons();
 
+        // Cart Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.lg\\:col-span-2');
 
+            function renderCart() {
+                let cart = JSON.parse(localStorage.getItem('cartGlobal') || '[]');
+                let total = 0;
+                let count = 0;
 
-                    </div>
+                document.querySelectorAll('.cart-item-row, .empty-cart-state').forEach(el => el.remove());
 
-                    <!-- Order Summary -->
-                    <div
-                        class="bg-white dark:bg-gray-900 p-8 shadow-sm border border-gray-100 dark:border-gray-800 rounded-sm h-fit">
-                        <h2 class="text-xl font-bold mb-6 font-sans border-b border-gray-200 dark:border-gray-700 pb-4">
-                            Order Summary</h2>
-
-                        <div class="flex justify-between mb-4 text-sm font-semibold text-gray-600">
-                            <span>Subtotal (0 items)</span>
-                            <span>$0.00</span>
-                        </div>
-
-                        <div
-                            class="flex justify-between mb-4 text-sm font-semibold text-gray-600 border-b border-gray-100 dark:border-gray-800 pb-4">
-                            <span>Estimated Shipping</span>
-                            <span class="text-green-500 font-bold">Free</span>
-                        </div>
-
-                        <div class="flex justify-between mb-8 text-lg font-bold text-dark dark:text-gray-100">
-                            <span>Total Amount</span>
-                            <span>$0.00</span>
-                        </div>
-
-                        <button id="btn-checkout" onclick="handleCartCheckout()"
-                            class="w-full bg-dark text-white py-4 font-bold uppercase tracking-widest text-sm hover:bg-primary transition-colors flex justify-center items-center rounded-sm shadow-md">
-                            Proceed to Checkout <i data-lucide="lock" class="ml-2 w-4 h-4"></i>
-                        </button>
-                        <div class="flex justify-center space-x-2 mt-4 text-gray-400">
-                            <i data-lucide="credit-card" class="w-8 h-8"></i>
-                            <!-- Adding fake icons layout -->
-                            <div
-                                class="w-8 h-8 border border-gray-200 dark:border-gray-700 rounded flex items-center justify-center font-serif font-bold text-xs">
-                                Visa</div>
-                            <div
-                                class="w-8 h-8 border border-gray-200 dark:border-gray-700 rounded flex items-center justify-center font-serif font-bold text-xs">
-                                MC</div>
-                        </div>
-                    </div>
-                </main>
-
-                <!-- Footer -->
-                <footer
-                    class="bg-white dark:bg-gray-900 py-8 border-t border-gray-200 dark:border-gray-700 mt-auto text-center text-xs text-gray-400">
-                    <p>&copy; 2026 SYUPERMARKET. All rights reserved.</p>
-                </footer>
-
-                <!-- Scripts -->
-                <script src="./js/payment-modal.js"></script>
-                <script src="./js/main.js?v=4"></script>
-                <script>
-                    lucide.createIcons();
-
-                    // Cart Logic
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const container = document.querySelector('.lg\\:col-span-2');
-
-                        function renderCart() {
-                            let cart = JSON.parse(localStorage.getItem('cartGlobal') || '[]');
-                            let total = 0;
-                            let count = 0;
-
-                            document.querySelectorAll('.cart-item-row, .empty-cart-state').forEach(el => el.remove());
-
-                            if (cart.length === 0) {
-                                const emptyHTML = `
+                if (cart.length === 0) {
+                    const emptyHTML = `
                     <div class="empty-cart-state py-20 text-center text-gray-400 font-bold tracking-widest text-sm uppercase flex flex-col items-center justify-center">
                         <i data-lucide="shopping-cart" class="w-16 h-16 mb-4 opacity-30 text-dark dark:text-gray-100"></i>
                         <p class="mb-6">Keranjang Anda Masih Kosong</p>
@@ -201,15 +258,15 @@
                             Beli Jaket Sekarang
                         </button>
                     </div>`;
-                                container.insertAdjacentHTML('beforeend', emptyHTML);
-                                if (typeof lucide !== 'undefined') lucide.createIcons();
-                            } else {
-                                let htmlStr = '';
-                                cart.forEach((item, index) => {
-                                    const itemTotal = item.price * item.qty;
-                                    total += itemTotal;
-                                    count += item.qty;
-                                    htmlStr += `
+                    container.insertAdjacentHTML('beforeend', emptyHTML);
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                } else {
+                    let htmlStr = '';
+                    cart.forEach((item, index) => {
+                        const itemTotal = item.price * item.qty;
+                        total += itemTotal;
+                        count += item.qty;
+                        htmlStr += `
                         <div class="cart-item-row flex flex-col md:grid md:grid-cols-12 gap-6 md:gap-4 py-6 border-b border-gray-100 dark:border-gray-800 md:items-center relative" data-id="${item.id}">
                             <div class="md:col-span-6 flex items-start md:items-center space-x-4">
                                 <img src="${item.image}" class="w-20 md:w-20 h-28 md:h-24 aspect-[4/5] object-cover bg-gray-50 rounded-sm" decoding="async" loading="lazy">
@@ -222,7 +279,7 @@
                             
                             <div class="flex justify-between items-center md:col-span-6 md:grid md:grid-cols-6 md:gap-4 w-full mt-4 md:mt-0">
                                 <div class="flex flex-col md:col-span-2 md:flex-row md:justify-center items-start md:items-center">
-                                    <span class="md:hidden text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Quantity</span>
+                                    <span class="md:hidden text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Kuantitas</span>
                                     <div class="flex items-center border border-gray-300 w-24 rounded-sm">
                                         <button class="qty-btn-minus px-2 py-1 hover:bg-gray-50" data-id="${item.id}">-</button>
                                         <input type="text" value="${item.qty}" class="w-full text-center outline-none font-bold text-sm bg-transparent dark:text-white" readonly>
@@ -230,7 +287,7 @@
                                     </div>
                                 </div>
                                 <div class="flex flex-col md:col-span-2 text-center font-bold text-sm text-gray-600">
-                                    <span class="md:hidden text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Price</span>
+                                    <span class="md:hidden text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Harga</span>
                                     Rp ${item.price.toLocaleString('id-ID')}
                                 </div>
                                 <div class="flex flex-col md:col-span-2 text-right md:text-center font-bold text-sm text-dark dark:text-gray-100">
@@ -240,77 +297,77 @@
                             </div>
                         </div>
                         `;
-                                });
-                                container.insertAdjacentHTML('beforeend', htmlStr);
-                                if (typeof lucide !== 'undefined') lucide.createIcons();
-                            }
-
-                            const summaryContainer = document.querySelector('.bg-white.p-8.shadow-sm, .dark\\:bg-gray-900.p-8.shadow-sm');
-                            if (summaryContainer) {
-                                const summaryLines = summaryContainer.querySelectorAll('.flex.justify-between');
-                                if (summaryLines.length >= 3) {
-                                    summaryLines[0].querySelector('span:nth-child(1)').innerText = `Subtotal (${count} items)`;
-                                    summaryLines[0].querySelector('span:nth-child(2)').innerText = `Rp ${total.toLocaleString('id-ID')}`;
-                                    summaryLines[2].querySelector('span:nth-child(2)').innerText = `Rp ${total.toLocaleString('id-ID')}`;
-                                }
-                            }
-
-                            if (window.updateCartCountGlobal) window.updateCartCountGlobal();
-                        }
-
-                        renderCart();
-
-                        container.addEventListener('click', (e) => {
-                            const removeBtn = e.target.closest('.remove-btn');
-                            const minusBtn = e.target.closest('.qty-btn-minus');
-                            const plusBtn = e.target.closest('.qty-btn-plus');
-
-                            let cart = JSON.parse(localStorage.getItem('cartGlobal') || '[]');
-
-                            if (removeBtn) {
-                                const id = removeBtn.getAttribute('data-id');
-                                cart = cart.filter(p => p.id !== id);
-                                localStorage.setItem('cartGlobal', JSON.stringify(cart));
-                                renderCart();
-                            }
-                            if (minusBtn) {
-                                const id = minusBtn.getAttribute('data-id');
-                                const item = cart.find(p => p.id === id);
-                                if (item && item.qty > 1) { item.qty--; }
-                                localStorage.setItem('cartGlobal', JSON.stringify(cart));
-                                renderCart();
-                            }
-                            if (plusBtn) {
-                                const id = plusBtn.getAttribute('data-id');
-                                const item = cart.find(p => p.id === id);
-                                if (item) { item.qty++; }
-                                localStorage.setItem('cartGlobal', JSON.stringify(cart));
-                                renderCart();
-                            }
-                        });
                     });
+                    container.insertAdjacentHTML('beforeend', htmlStr);
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                }
 
-                    // ── Cart Checkout → Payment Modal ──
-                    window.handleCartCheckout = function () {
-                        const cart = JSON.parse(localStorage.getItem('cartGlobal') || '[]');
-                        if (cart.length === 0) {
-                            alert('Keranjang kamu kosong! Tambahkan produk terlebih dahulu.');
-                            return;
-                        }
-                        const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-                        openPaymentModal({
-                            source: 'cart',
-                            items: cart.map(item => ({
-                                id: item.id,
-                                name: item.name,
-                                image: item.image,
-                                price: item.price,
-                                qty: item.qty
-                            })),
-                            total
-                        });
-                    };
-                </script>
-            </body>
+                const summaryContainer = document.querySelector('.bg-white.p-8.shadow-sm, .dark\\:bg-gray-900.p-8.shadow-sm');
+                if (summaryContainer) {
+                    const summaryLines = summaryContainer.querySelectorAll('.flex.justify-between');
+                    if (summaryLines.length >= 3) {
+                        summaryLines[0].querySelector('span:nth-child(1)').innerText = `Subtotal (${count} items)`;
+                        summaryLines[0].querySelector('span:nth-child(2)').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+                        summaryLines[2].querySelector('span:nth-child(2)').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+                    }
+                }
 
-            </html>
+                if (window.updateCartCountGlobal) window.updateCartCountGlobal();
+            }
+
+            renderCart();
+
+            container.addEventListener('click', (e) => {
+                const removeBtn = e.target.closest('.remove-btn');
+                const minusBtn = e.target.closest('.qty-btn-minus');
+                const plusBtn = e.target.closest('.qty-btn-plus');
+
+                let cart = JSON.parse(localStorage.getItem('cartGlobal') || '[]');
+
+                if (removeBtn) {
+                    const id = removeBtn.getAttribute('data-id');
+                    cart = cart.filter(p => p.id !== id);
+                    localStorage.setItem('cartGlobal', JSON.stringify(cart));
+                    renderCart();
+                }
+                if (minusBtn) {
+                    const id = minusBtn.getAttribute('data-id');
+                    const item = cart.find(p => p.id === id);
+                    if (item && item.qty > 1) { item.qty--; }
+                    localStorage.setItem('cartGlobal', JSON.stringify(cart));
+                    renderCart();
+                }
+                if (plusBtn) {
+                    const id = plusBtn.getAttribute('data-id');
+                    const item = cart.find(p => p.id === id);
+                    if (item) { item.qty++; }
+                    localStorage.setItem('cartGlobal', JSON.stringify(cart));
+                    renderCart();
+                }
+            });
+        });
+
+        // ── Cart Checkout → Payment Modal ──
+        window.handleCartCheckout = function () {
+            const cart = JSON.parse(localStorage.getItem('cartGlobal') || '[]');
+            if (cart.length === 0) {
+                alert('Keranjang kamu kosong! Tambahkan produk terlebih dahulu.');
+                return;
+            }
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            openPaymentModal({
+                source: 'cart',
+                items: cart.map(item => ({
+                    id: item.id,
+                    name: item.name,
+                    image: item.image,
+                    price: item.price,
+                    qty: item.qty
+                })),
+                total
+            });
+        };
+    </script>
+</body>
+
+</html>

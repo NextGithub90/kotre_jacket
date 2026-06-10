@@ -2,7 +2,7 @@
     {
         "id": "CWPS37jPQgW",
         "name": "Uniboss Work Jacket.",
-        "status": "available",
+        "status": "sold",
         "size": "XL Fit L (P67 cm × L59 cm)",
         "measurements": "P: 67 cm x L: 59 cm",
         "condition": "9/10",
@@ -23,7 +23,7 @@
     {
         "id": "CWPTKmTPzxy",
         "name": "UP. Renoma Casual Jacket | Black.",
-        "status": "available",
+        "status": "sold",
         "size": "Size L (P71 cm × L57 cm)",
         "measurements": "P: 71 cm x L: 57 cm",
         "condition": "8.9/10.",
@@ -43,7 +43,7 @@
     {
         "id": "CWPTakePPZm",
         "name": "Phoenix Casual Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "XL (P74 cm × L65 cm)",
         "measurements": "P: 74 cm x L: 65 cm",
         "condition": "9/10.",
@@ -62,7 +62,7 @@
     {
         "id": "CWPT54-P-zG",
         "name": "EWP Limsang | Light Sky Blue.",
-        "status": "available",
+        "status": "sold",
         "size": "105 - L oversize fit XL.",
         "measurements": "P: 68cm x L: 60 cm",
         "condition": "9.5/10",
@@ -82,7 +82,7 @@
     {
         "id": "CWPUOEgv4vE",
         "name": "Rogatis Casual Jacket | Soft Yellow",
-        "status": "available",
+        "status": "sold",
         "size": "Fit L (P70 cm × L59 cm)",
         "measurements": "P: 70 cm x L: 59 cm",
         "condition": "9/10.",
@@ -104,7 +104,7 @@
     {
         "id": "CWPUfHmPr76",
         "name": "Parkland Casual Jacket | White.",
-        "status": "available",
+        "status": "sold",
         "size": "105 - Fit L (P69cm × L60 cm)",
         "measurements": "P: 69cm x L: 60 cm",
         "condition": "8.9/10. Good Cond.",
@@ -138,7 +138,7 @@
     {
         "id": "CWhSZFnPn05",
         "name": "Lee Dong So Casual Jacket | Dark Brown.",
-        "status": "available",
+        "status": "sold",
         "size": "105 fit L/XL (P75 cm × L63 cm)",
         "measurements": "P: 75 cm x L: 63 cm",
         "condition": "9/10.",
@@ -159,7 +159,7 @@
     {
         "id": "CWhS07nPvdL",
         "name": "Casual Jacket by Indian Return To Nature | Navy Stripe.",
-        "status": "available",
+        "status": "sold",
         "size": "fit L (P69 cm × L63 cm)",
         "measurements": "P: 69 cm x L: 63 cm",
         "condition": "9/10.",
@@ -179,7 +179,7 @@
     {
         "id": "CWhTLGVPnDb",
         "name": "Paco Rabone Casual Jacket | Black",
-        "status": "available",
+        "status": "sold",
         "size": "fit L (P69 cm × L60 cm)",
         "measurements": "P: 69 cm x L: 60 cm",
         "condition": "9/10.",
@@ -198,7 +198,7 @@
     {
         "id": "CWhTbTsPJtz",
         "name": "EWP Yeon Kwang Casual Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "100 fit L (P68 cm × L57 cm)",
         "measurements": "P: 68 cm x L: 57 cm",
         "condition": "8,5/10.",
@@ -219,7 +219,7 @@
     {
         "id": "CWhT_f-PLrx",
         "name": "Casual Jacket by Indian Return To Nature | Soft Yellow.",
-        "status": "available",
+        "status": "sold",
         "size": "fit L (P69 cm × L58 cm)",
         "measurements": "P: 69 cm x L: 58 cm",
         "condition": "9/10.",
@@ -254,7 +254,7 @@
     {
         "id": "CW-Au-Jv0hZ",
         "name": "LangBang Casual Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "105 fit L (P 67 cm × L 61 cm)",
         "measurements": "P: 67 cm x L: 61 cm",
         "condition": "",
@@ -275,7 +275,7 @@
     {
         "id": "CW-BBWJvv79",
         "name": "Ziben Casual Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "M (P 66 cm × L 56 cm)",
         "measurements": "P: 66 cm x L: 56 cm",
         "condition": "",
@@ -296,7 +296,7 @@
     {
         "id": "CW-B1FDvuCP",
         "name": "Indian Casual Jacket White Strip",
-        "status": "available",
+        "status": "sold",
         "size": "L (P 67 cm × L 62 cm)",
         "measurements": "P: 67 cm x L: 62 cm",
         "condition": "",
@@ -318,7 +318,7 @@
     {
         "id": "CW-CEsKPPP5",
         "name": "Marciano Casual Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "L (P 70 cm × L 58 cm)",
         "measurements": "P: 70 cm x L: 58 cm",
         "condition": "",
@@ -337,7 +337,7 @@
     {
         "id": "CW-CbamvpFo",
         "name": "OXBL Classic",
-        "status": "available",
+        "status": "sold",
         "size": "L (P 70 cm × L 59 cm)",
         "measurements": "P: 70 cm x L: 59 cm",
         "condition": "",
@@ -355,7 +355,7 @@
     {
         "id": "CW-DHLzPGSz",
         "name": "KD 320006　長袖ジャンパー【HIGHPARM BIRDIE】",
-        "status": "available",
+        "status": "sold",
         "size": "6L (P 72 cm × L 65 cm)",
         "measurements": "P: 72 cm x L: 65 cm",
         "condition": "",
@@ -377,7 +377,7 @@
     {
         "id": "CX8LvyRvG6G",
         "name": "Calbin Town",
-        "status": "available",
+        "status": "sold",
         "size": "95 (P 64 cm × L 56 cm)",
         "measurements": "P: 64 cm x L: 56 cm",
         "condition": "",
@@ -396,7 +396,7 @@
     {
         "id": "CX8MBvBvWbv",
         "name": "Manchest | Navy Pekat",
-        "status": "available",
+        "status": "sold",
         "size": "100 on tag (P 63 cm × L 62 cm)",
         "measurements": "P: 63 cm x L: 62 cm",
         "condition": "",
@@ -413,7 +413,7 @@
     {
         "id": "CX8MXJRPOg1",
         "name": "Indian Tartan Jacket | Black",
-        "status": "available",
+        "status": "sold",
         "size": "L (P 68 cm × L 62 cm)",
         "measurements": "P: 68 cm x L: 62 cm",
         "condition": "",
@@ -433,7 +433,7 @@
     {
         "id": "CX8MqhpPU7K",
         "name": "London Bridge | Navy",
-        "status": "available",
+        "status": "sold",
         "size": "100 (P 62 cm × L 62 cm)",
         "measurements": "P: 62 cm x L: 62 cm",
         "condition": "",
@@ -452,7 +452,7 @@
     {
         "id": "CX8M2Y0vn4O",
         "name": "Calvin Town",
-        "status": "available",
+        "status": "sold",
         "size": "95 on tag (P 64 cm × L 57 cm)",
         "measurements": "P: 64 cm x L: 57 cm",
         "condition": "",
@@ -470,7 +470,7 @@
     {
         "id": "CX8NHoWPUfo",
         "name": "Flight Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "M (P 62 cm × L 61 cm)",
         "measurements": "P: 62 cm x L: 61 cm",
         "condition": "",
@@ -489,7 +489,7 @@
     {
         "id": "CYOTm_QP8Mr",
         "name": "Casual Jacket - Black",
-        "status": "available",
+        "status": "sold",
         "size": "L (P 70 cm × L 57 cm)",
         "measurements": "P: 70 cm x L: 57 cm",
         "condition": "",
@@ -509,7 +509,7 @@
     {
         "id": "CYOT7nSv1ln",
         "name": "Indian Reversible (bisa dibalik)",
-        "status": "available",
+        "status": "sold",
         "size": "L (P 69 cm × L 61 cm)",
         "measurements": "P: 69 cm x L: 61 cm",
         "condition": "",
@@ -530,7 +530,7 @@
     {
         "id": "CYOUDmJPZ8M",
         "name": "Wolsey V Neck - Navy",
-        "status": "available",
+        "status": "sold",
         "size": "M (P 62 cm × L 58 cm)",
         "measurements": "P: 62 cm x L: 58 cm",
         "condition": "",
@@ -548,7 +548,7 @@
     {
         "id": "CYOUTg-vhIN",
         "name": "T.BUC Casual Jacket - Navy",
-        "status": "available",
+        "status": "sold",
         "size": "XL fit L (P 67 cm × L 58 cm)",
         "measurements": "P: 67 cm x L: 58 cm",
         "condition": "",
@@ -569,7 +569,7 @@
     {
         "id": "CZEfHZtPIqf",
         "name": "Bomber Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "L (P 70 cm × L 57 cm)",
         "measurements": "P: 70 cm x L: 57 cm",
         "condition": "",
@@ -589,7 +589,7 @@
     {
         "id": "CZEfUvavFMK",
         "name": "London Fog Casual Jacket - Black",
-        "status": "available",
+        "status": "sold",
         "size": "L (P 70 × L 59 cm)",
         "measurements": "",
         "condition": "",
@@ -607,7 +607,7 @@
     {
         "id": "CZEfkOUvN7C",
         "name": "Windy Club Casual Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "L (P 70 × L 59 cm)",
         "measurements": "",
         "condition": "",
@@ -626,7 +626,7 @@
     {
         "id": "CZEfvd1PIrP",
         "name": "Parkland Tartan Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "L (P 67 × L 61 cm)",
         "measurements": "",
         "condition": "",
@@ -645,7 +645,7 @@
     {
         "id": "CZEgHthPrIf",
         "name": "Lac*ste - Navy Pekat",
-        "status": "available",
+        "status": "sold",
         "size": "L (P 67 cm × L 61 cm)",
         "measurements": "P: 67 cm x L: 61 cm",
         "condition": "",
@@ -668,7 +668,7 @@
     {
         "id": "CZobdEFPJIu",
         "name": "Napolee Casual Jacket - Soft Yellow",
-        "status": "available",
+        "status": "sold",
         "size": "95 (P 63 cm × L 55 cm)",
         "measurements": "P: 63 cm x L: 55 cm",
         "condition": "",
@@ -687,7 +687,7 @@
     {
         "id": "CZob2fovW8p",
         "name": "Countess Marra - Navy",
-        "status": "available",
+        "status": "sold",
         "size": "L (P 68 cm × L 65 cm)",
         "measurements": "P: 68 cm x L: 65 cm",
         "condition": "",
@@ -706,7 +706,7 @@
     {
         "id": "CZocOdKPVGu",
         "name": "Nik* Golf V-Neck - Black",
-        "status": "available",
+        "status": "sold",
         "size": "L (P 72 cm × L 59 cm)",
         "measurements": "P: 72 cm x L: 59 cm",
         "condition": "",
@@ -728,7 +728,7 @@
     {
         "id": "CZoc0YWPyV3",
         "name": "K-Boxing  Casual Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "L (P 70 cm × L 61 cm)",
         "measurements": "P: 70 cm x L: 61 cm",
         "condition": "",
@@ -749,7 +749,7 @@
     {
         "id": "CZodFrMPwlx",
         "name": "Indian Casual Jacket - Black",
-        "status": "available",
+        "status": "sold",
         "size": "L (P 68 cm × L 62 cm)",
         "measurements": "P: 68 cm x L: 62 cm",
         "condition": "",
@@ -768,7 +768,7 @@
     {
         "id": "CaMdonaP6Uh",
         "name": "Indian Casual Jacket - Hitam Pekat",
-        "status": "available",
+        "status": "sold",
         "size": "105 - fit XL",
         "measurements": "P: 76 cm x L: 65 cm",
         "condition": "95%",
@@ -788,7 +788,7 @@
     {
         "id": "CaMeChfveJh",
         "name": "Apache Casual Jacket - Navy",
-        "status": "available",
+        "status": "sold",
         "size": "L",
         "measurements": "P: 66 cm x L: 60 cm",
         "condition": "95%",
@@ -808,7 +808,7 @@
     {
         "id": "CaMeSanviZ4",
         "name": "Maestro Casual Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "L",
         "measurements": "",
         "condition": "95%",
@@ -828,7 +828,7 @@
     {
         "id": "CaMedHrPAKD",
         "name": "Parkland Tartan Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "L",
         "measurements": "P: 66 cm x L: 61 cm",
         "condition": "95%",
@@ -847,7 +847,7 @@
     {
         "id": "CaMeqsdPG1M",
         "name": "Gamakatsu Varsity Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "L",
         "measurements": "P: 70 cm x L: 65 cm",
         "condition": "95%",
@@ -867,7 +867,7 @@
     {
         "id": "CaMe0xHPDHN",
         "name": "London Fog Casual Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "L fit XL",
         "measurements": "P: 71 cm x L: 65 cm",
         "condition": "95%",
@@ -908,7 +908,7 @@
     {
         "id": "CbCnPC-P0Ox",
         "name": "Windy Club Tartan Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "95 fit L",
         "measurements": "P: 65 cm x L: 58 cm",
         "condition": "95%",
@@ -928,7 +928,7 @@
     {
         "id": "CbCntGyvHIS",
         "name": "Manchest Casual Jacket - Navy Pekat",
-        "status": "available",
+        "status": "sold",
         "size": "100 on tag",
         "measurements": "P: 63 cm x L: 62 cm",
         "condition": "90% t",
@@ -947,7 +947,7 @@
     {
         "id": "CbCoA1JvrDW",
         "name": "Caesar Casual Jacket - Soft Yellow",
-        "status": "available",
+        "status": "sold",
         "size": "100 fit L",
         "measurements": "P: 68 cm x L: 59 cm",
         "condition": "95% kayak beli baruu",
@@ -967,7 +967,7 @@
     {
         "id": "CbCoQ9Mv-kU",
         "name": "Korean Imperial Tartan Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "100",
         "measurements": "P: 66 cm x L: 64 cm",
         "condition": "99%",
@@ -987,7 +987,7 @@
     {
         "id": "CbCofSRvwe7",
         "name": "Vintage Descente Windbreaker Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "L",
         "measurements": "P: 67 cm x L: 60 cm",
         "condition": "88%",
@@ -1008,7 +1008,7 @@
     {
         "id": "CcLCb6UvGQo",
         "name": "ROTC Windbreaker Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "L",
         "measurements": "P: 72 cm x L: 61 cm",
         "condition": "90%",
@@ -1029,7 +1029,7 @@
     {
         "id": "CcLCr6VPz3S",
         "name": "Lamitie Casual Jacket",
-        "status": "available",
+        "status": "sold",
         "size": "110",
         "measurements": "P: 75 cm x L: 63 cm",
         "condition": "97%",

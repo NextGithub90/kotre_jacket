@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,75 +21,162 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Nunito Sans', sans-serif; overflow-x: hidden; }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            overflow-x: hidden;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-white dark:bg-gray-900 text-dark dark:text-gray-100 transition-colors duration-300 flex flex-col min-h-screen">
 
-    <nav class="w-full bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 py-6 z-50 transition-all duration-300" id="navbar">
+<body
+    class="bg-white dark:bg-gray-900 text-dark dark:text-gray-100 transition-colors duration-300 flex flex-col min-h-screen">
+
+    <nav class="w-full bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 py-6 z-50 transition-all duration-300"
+        id="navbar">
         <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
             <div class="text-2xl font-bold tracking-widest uppercase cursor-pointer">
                 <a href="index.html">SYUPERMARKET<span class="text-primary text-3xl leading-none">.</span></a>
             </div>
             <div class="flex items-center space-x-8 text-dark dark:text-white">
-                <button id="theme-toggle" class="hover:text-primary transition-colors duration-200 cursor-pointer flex items-center justify-center outline-none"><i data-lucide="moon" class="w-5 h-5 theme-icon"></i></button>
-                <button id="mobile-menu-btn" class="hover:text-primary z-[60] relative cursor-pointer flex items-center justify-center outline-none"><i data-lucide="menu" class="w-6 h-6"></i></button>
+                <button id="theme-toggle"
+                    class="hover:text-primary transition-colors duration-200 cursor-pointer flex items-center justify-center outline-none"><i
+                        data-lucide="moon" class="w-5 h-5 theme-icon"></i></button>
+                <button id="mobile-menu-btn"
+                    class="hover:text-primary z-[60] relative cursor-pointer flex items-center justify-center outline-none"><i
+                        data-lucide="menu" class="w-6 h-6"></i></button>
             </div>
         </div>
     </nav>
 
     <!-- Mobile Sidebar Backdrop -->
-    <div id="mobile-backdrop" class="fixed inset-0 bg-black/60 z-[70] opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm"></div>
+    <div id="mobile-backdrop"
+        class="fixed inset-0 bg-black/60 z-[70] opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm">
+    </div>
 
     <!-- Mobile Sidebar -->
-    <div id="mobile-sidebar" class="fixed top-0 right-0 h-full w-[350px] bg-white dark:bg-gray-900 z-[80] transform translate-x-full transition-transform duration-500 ease-out shadow-2xl flex flex-col">
+    <div id="mobile-sidebar"
+        class="fixed top-0 right-0 h-full w-[350px] bg-white dark:bg-gray-900 z-[80] transform translate-x-full transition-transform duration-500 ease-out shadow-2xl flex flex-col">
         <div class="px-8 py-6 w-full flex justify-between items-center border-b border-gray-100 dark:border-gray-800">
             <h2 class="text-xl font-bold tracking-widest text-dark dark:text-white uppercase">Menu</h2>
-            <button id="mobile-close-btn" class="text-gray-400 hover:text-primary transition-colors cursor-pointer p-2 -mr-2 outline-none"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <button id="mobile-close-btn"
+                class="text-gray-400 hover:text-primary transition-colors cursor-pointer p-2 -mr-2 outline-none"><i
+                    data-lucide="x" class="w-6 h-6"></i></button>
         </div>
-        <div class="flex flex-col p-8 space-y-6 text-sm font-bold tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400">
-            <a href="index.html" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Home</a>
-            <a href="shop.html" class="text-primary mobile-link transition-colors">Shop</a>
-            <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Collection</a>
-            <a href="about.html" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">About</a>
+        <div
+            class="flex flex-col p-8 space-y-6 text-sm font-bold tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400">
+            <a href="index.html" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Beranda</a>
+            <a href="shop.html" class="text-primary mobile-link transition-colors">Belanja</a>
+            <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Koleksi</a>
+            <a href="about.html" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Tentang</a>
             <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Blog</a>
-            <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Contact Us</a>
+            <a href="#" class="hover:text-dark dark:hover:text-white mobile-link transition-colors">Hubungi Kami</a>
         </div>
         <div class="px-8 pb-6 text-sm font-bold tracking-widest flex flex-col space-y-6">
-            <a href="cart.html" class="flex items-center hover:text-primary dark:text-white transition-colors border-t border-gray-100 dark:border-gray-800 pt-6">
+            <a href="cart.html"
+                class="flex items-center hover:text-primary dark:text-white transition-colors border-t border-gray-100 dark:border-gray-800 pt-6">
                 <i data-lucide="shopping-bag" class="w-5 h-5 mr-3"></i> Cart (<span id="cart-count">0</span>)
             </a>
             <a href="#" class="flex items-center hover:text-primary dark:text-white transition-colors">
                 <i data-lucide="user" class="w-5 h-5 mr-3"></i> My Account
             </a>
         </div>
-        <div class="mt-auto p-8 border-t border-gray-100 dark:border-gray-800 flex justify-center space-x-6 text-gray-400">
+        <div
+            class="mt-auto p-8 border-t border-gray-100 dark:border-gray-800 flex justify-center space-x-6 text-gray-400">
             <i data-lucide="instagram" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
             <i data-lucide="facebook" class="w-5 h-5 cursor-pointer hover:text-primary"></i>
         </div>
     </div>
 
     <!-- Shop Header -->
-    <header class="w-full pt-16 pb-12 bg-gray-50 dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold uppercase tracking-widest text-dark dark:text-white mb-4">The Collection</h1>
-        <p class="text-gray-500 dark:text-gray-400 tracking-wide text-sm font-semibold max-w-2xl mx-auto">Explore all 60 exclusive pieces curated by AI intelligence.</p>
+    <header
+        class="w-full pt-16 pb-12 bg-gray-50 dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold uppercase tracking-widest text-dark dark:text-white mb-4">The
+            Collection</h1>
+        <p class="text-gray-500 dark:text-gray-400 tracking-wide text-sm font-semibold max-w-2xl mx-auto">Discover the
+            best collection with guaranteed quality and affordable prices.</p>
     </header>
 
     <!-- Detailed Grid -->
     <main class="flex-grow max-w-[1400px] mx-auto px-6 py-16 w-full">
         <!-- The Dynamic JS Grid -->
-        <div id="dynamic-full-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-12">
+        <div id="dynamic-full-grid"
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-12">
             <!-- Filled by main.js via galleryDB -->
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-50 dark:bg-gray-900 py-12 border-t border-gray-200 dark:border-gray-800 mt-auto text-center">
-        <h2 class="text-2xl font-bold tracking-widest mb-6">SYUPERMARKET<span class="text-primary">.</span></h2>
-        <p class="text-xs text-gray-400 font-semibold tracking-widest">&copy; 2026 SYUPERMARKET. ALL RIGHTS RESERVED.</p>
+    <footer class="bg-gray-50 dark:bg-gray-900 py-16 border-t border-gray-200 dark:border-gray-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 text-left">
+            <div class="md:col-span-1">
+                <div class="text-3xl font-bold tracking-widest uppercase mb-6">
+                    SYUPERMARKET<span class="text-primary text-4xl leading-none">.</span>
+                </div>
+                <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">Koleksi premium jaket thrift kualitas terbaik.
+                </p>
+                <div class="flex flex-col space-y-3 mt-4 text-dark dark:text-gray-100 text-sm">
+                    <a href="tel:085846681576" class="flex items-center space-x-3 hover:text-primary transition-colors">
+                        <i data-lucide="phone" class="w-5 h-5 text-primary"></i>
+                        <span class="font-bold">0858 4668 1576</span>
+                    </a>
+                    <a href="https://wa.me/6288971950875" target="_blank"
+                        class="flex items-center space-x-3 hover:text-green-500 transition-colors">
+                        <i data-lucide="message-circle" class="w-5 h-5 text-green-500"></i>
+                        <span class="font-bold">0889 7195 0875</span>
+                    </a>
+                    <a href="mailto:syupermarketstore@gmail.com"
+                        class="flex items-center space-x-3 hover:text-primary transition-colors">
+                        <i data-lucide="mail" class="w-5 h-5 text-primary"></i>
+                        <span class="font-medium text-xs">syupermarketstore@gmail.com</span>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-bold uppercase tracking-wider mb-6">Tautan</h4>
+                <ul class="space-y-4 text-sm text-gray-500 dark:text-gray-400">
+                    <li><a href="index.html" class="hover:text-primary transition-colors">Beranda</a></li>
+                    <li><a href="about.html" class="hover:text-primary transition-colors">Tentang Kami</a></li>
+                    <li><a href="shop.html" class="hover:text-primary transition-colors">Belanja</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Kontak</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold uppercase tracking-wider mb-6">Kebijakan</h4>
+                <ul class="space-y-4 text-sm text-gray-500 dark:text-gray-400">
+                    <li><a href="#" class="hover:text-primary transition-colors">Kebijakan Privasi</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Syarat & Ketentuan</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Pengembalian Dana</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Info Pengiriman</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold uppercase tracking-wider mb-6">Berlangganan</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Get the latest fashion news right in your
+                    inbox.</p>
+                <form class="flex border-b border-gray-300 pb-2">
+                    <input type="email" placeholder="Alamat email Anda"
+                        class="w-full bg-transparent outline-none text-sm text-dark dark:text-gray-100 placeholder-gray-400">
+                    <button type="button" class="text-primary hover:text-dark dark:text-gray-100 transition-colors"><i
+                            data-lucide="send" class="w-5 h-5"></i></button>
+                </form>
+            </div>
+        </div>
+        <div
+            class="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-gray-100 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
+            <p>&copy; 2026 SYUPERMARKET. Seluruh hak cipta dilindungi Undang-Undang.</p>
+            <div class="flex space-x-4 mt-4 md:mt-0">
+                <i data-lucide="facebook" class="w-4 h-4 cursor-pointer hover:text-primary"></i>
+                <i data-lucide="twitter" class="w-4 h-4 cursor-pointer hover:text-primary"></i>
+                <i data-lucide="instagram" class="w-4 h-4 cursor-pointer hover:text-primary"></i>
+            </div>
+        </div>
     </footer>
 
     <!-- Scripts -->
@@ -98,4 +186,5 @@
         lucide.createIcons();
     </script>
 </body>
+
 </html>

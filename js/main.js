@@ -279,8 +279,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         function drawCards(database) {
             return database.map(item => {
                 const coverImage = item.images && item.images.length > 0 ? item.images[0] : 'assets/images/placeholder.webp';
-                const tagLabel = item.status === 'sold' ? 'SOLD OUT' : 'AVAILABLE';
-                const cursorStyle = item.status === 'sold' ? 'cursor-not-allowed opacity-80' : 'cursor-pointer group';
+                const tagLabel = item.status === 'sold' ? 'HABIS' : 'TERSEDIA';
+                const cursorStyle = item.status === 'sold' ? 'cursor-pointer opacity-80 filter grayscale' : 'cursor-pointer group';
                 return `
                 <a href="detail_product.html?id=${item.id}" class="gs-product block relative ${cursorStyle}">
                     <div class="relative overflow-hidden mb-4 bg-secondary dark:bg-black rounded-sm aspect-[4/5] flex items-center justify-center p-2">
@@ -315,8 +315,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 return db.map((item) => {
                     const coverImage = item.images && item.images.length > 0 ? item.images[0] : 'assets/images/placeholder.webp';
                     return `
-                    <a href="detail_product.html?id=${item.id}" class="flex items-center space-x-4 group cursor-pointer">
-                        <div class="w-20 h-20 flex-shrink-0 bg-gray-50 flex items-center justify-center overflow-hidden rounded-sm border border-gray-100 dark:border-gray-800">
+                    <a href="detail_product.html?id=${item.id}" class="flex items-center space-x-4 group ${item.status === 'sold' ? 'cursor-not-allowed' : 'cursor-pointer'}">
+                        <div class="w-20 h-20 flex-shrink-0 bg-gray-50 flex items-center justify-center overflow-hidden rounded-sm border border-gray-100 dark:border-gray-800 ${item.status === 'sold' ? 'filter grayscale opacity-90' : ''}">
                             <img src="${coverImage}" alt="${item.name}" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" decoding="async" loading="lazy">
                         </div>
                         <div class="overflow-hidden">

@@ -40,17 +40,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         if (product.status === 'sold') {
             if (statusEl) {
-                statusEl.innerText = "SOLD OUT";
+                statusEl.innerText = "HABIS";
                 statusEl.className = "bg-red-500 text-white text-xs font-bold px-2 py-1 uppercase rounded-sm tracking-wider";
             }
             if (btnCart) {
                 btnCart.disabled = true;
-                btnCart.innerText = "SOLD OUT";
+                btnCart.innerText = "HABIS";
                 btnCart.className = "flex-1 bg-gray-400 text-white py-4 font-bold uppercase tracking-widest text-sm rounded-sm cursor-not-allowed";
             }
         } else {
             if (statusEl) {
-                statusEl.innerText = "AVAILABLE";
+                statusEl.innerText = "TERSEDIA";
                 statusEl.className = "bg-dark text-white text-xs font-bold px-2 py-1 uppercase rounded-sm tracking-wider";
             }
         }
@@ -59,7 +59,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (measurementsEl) measurementsEl.innerText = product.measurements;
         if (conditionEl) conditionEl.innerText = product.condition;
 
+        
+        // Inject Random Testimonial
+        const testimonials = [
+            "Kualitas jaket Thrift di sini sangat otentik 100% dan bahan awet seperti baru. Packing aman!",
+            "Bahan premium, persis dengan yang ada di foto. Pengiriman sangat memuaskan dan wangi bajunya!",
+            "Kondisi barang nyaris sempurna, tidak kelihatan seperti barang bekas. Recommended seller!",
+            "Dapat jaket branded incaran dengan harga yang sangat sepadan. Thrifting di sini memang puas banget.",
+            "Admin ramah, fast response. Pakaian tiba dalam keadaan bersih dan siap pakai."
+        ];
+        const testyEl = document.getElementById('random-testimonial');
+        if (testyEl) {
+            testyEl.innerText = '\"' + testimonials[Math.floor(Math.random() * testimonials.length)] + '\"';
+        }
+
         if (descEl) {
+
             // Replace newlines with <br> for HTML rendering
             descEl.innerHTML = product.description.replace(/\\n/g, '<br>');
         }
@@ -113,7 +128,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (btnBuyNow) {
             if (product.status === 'sold') {
                 btnBuyNow.disabled = true;
-                btnBuyNow.innerText = "SOLD OUT";
+                btnBuyNow.innerText = "HABIS";
                 btnBuyNow.className = "w-full bg-gray-300 text-gray-500 py-4 font-bold uppercase tracking-widest text-sm mb-8 rounded-sm cursor-not-allowed";
             } else {
                 btnBuyNow.addEventListener('click', (e) => {
@@ -148,7 +163,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <a href="detail_product.html?id=${p.id}" class="flex flex-col cursor-pointer group">
                     <div class="relative bg-gray-50 aspect-[4/5] flex items-center justify-center overflow-hidden mb-4 rounded-sm">
                         <img src="${p.images[0]}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
-                        ${p.status === 'sold' ? '<div class="absolute inset-0 bg-black/40 flex items-center justify-center"><span class="text-white text-xs font-bold tracking-widest uppercase border border-white px-2 py-1">Sold Out</span></div>' : ''}
+                        ${p.status === 'sold' ? '<div class="absolute inset-0 bg-black/40 flex items-center justify-center"><span class="text-white text-xs font-bold tracking-widest uppercase border border-white px-2 py-1">HABIS</span></div>' : ''}
                     </div>
                     <h3 class="font-bold text-sm text-dark dark:text-gray-100 mb-1 truncate">${p.name}</h3>
                     <p class="text-sm font-bold text-gray-500 dark:text-gray-400">Rp ${p.price}</p>
